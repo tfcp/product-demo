@@ -8,7 +8,9 @@ import (
 
 func main() {
 	if err := gcmd.BindHandleMap(map[string]func(){
-		"server": bootstrap.Run,
+		"server":  bootstrap.Run,
+		"process": bootstrap.RunProcess,
+		"cron":    bootstrap.RunCron,
 		//"consumer": process.Listener,
 	}); err != nil {
 		log.Logger.Fatal(err)
