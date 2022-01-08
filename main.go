@@ -2,7 +2,7 @@ package main
 
 import (
 	"gf/bootstrap"
-	"github.com/gogf/gf/frame/g"
+	"gf/library/log"
 	"github.com/gogf/gf/os/gcmd"
 )
 
@@ -11,9 +11,9 @@ func main() {
 		"server": bootstrap.Run,
 		//"consumer": process.Listener,
 	}); err != nil {
-		g.Log().Fatal(err)
+		log.Logger.Fatal(err)
 	}
 	if err := gcmd.AutoRun(); err != nil {
-		g.Log().Fatal(err)
+		log.Logger.Fatal(err)
 	}
 }

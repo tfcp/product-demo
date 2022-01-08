@@ -10,5 +10,6 @@ var Router *gin.Engine
 func InitRouter() {
 	Router = gin.Default()
 	dm := Router.Group("demo")
-	dm.GET("/hello", demo.Hello)
+	dm.GET("/hello-list", demo.HelloListApi)
+	dm.GET("/hello-info", demo.HelloInfoApi)
 }

@@ -11,7 +11,7 @@ go.sum
 .settings/
 .vscode/
 vender/
-log/
+logs/
 composer.lock
 gitpush.sh
 cbuild
