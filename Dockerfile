@@ -7,7 +7,7 @@ LABEL maintainer="zhaosuji@medlinker.com"
 #######################################################
 
 # 设置环境变量
-ENV APP_NAME med-prow
+ENV APP_NAME project
 
 ENV APP_ROOT /var/www
 ENV APP_PATH $APP_ROOT/$APP_NAME

@@ -11,7 +11,6 @@ func main() {
 		"server":  bootstrap.Run,
 		"process": bootstrap.RunProcess,
 		"cron":    bootstrap.RunCron,
-		//"consumer": process.Listener,
 	}); err != nil {
 		log.Logger.Fatal(err)
 	}

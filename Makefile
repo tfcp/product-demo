@@ -4,4 +4,4 @@ build:
 	@go build -v .
 
 run:
-    @go run main.go server
+    	@go run main.go server
