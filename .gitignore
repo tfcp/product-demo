@@ -19,3 +19,4 @@ cbuild
 config/config.toml
 main
 .vscode
+web/node_modules/*
