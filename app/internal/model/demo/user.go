@@ -10,7 +10,7 @@ type User struct {
 	Name         string    `json:"name"`
 	Age          int       `json:"age"`
 	Sex          int       `json:"sex"`
-	Role         string    `json:"role"`
+	Role         int       `json:"role"`
 	Pwd          string    `json:"pwd"`
 	Avatar       string    `json:"avatar"`
 	Introduction string    `json:"introduction"`

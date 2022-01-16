@@ -30,7 +30,7 @@ func LoginApi(c *gin.Context) {
 		utils.Response(c, code.ErrPwd, err.Error())
 		return
 	}
-	token, err := utils.GenerateToken(um.Name, um.Avatar, um.Role, um.Introduction)
+	token, err := utils.GenerateToken(um.Name, um.Avatar, um.Introduction, um.Role)
 	if err != nil {
 		utils.Response(c, code.ErrPwd, err.Error())
 		return

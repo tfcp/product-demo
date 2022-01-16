@@ -3,6 +3,7 @@ package utils
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"strconv"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -23,14 +24,15 @@ type Claims struct {
 
 // GenerateToken generate tokens used for auth
 //func GenerateToken(username, password string) (string, error) {
-func GenerateToken(name, avatar, roles, introduction string) (string, error) {
+func GenerateToken(name, avatar, introduction string, roles int) (string, error) {
 	nowTime := time.Now()
 	expireTime := nowTime.Add(jwtExpire)
 	//EncodeMD5(username),
 	//EncodeMD5(password),
 	claims := Claims{
-		Avatar:       avatar,
-		Roles:        []string{roles},
+		Avatar: avatar,
+		//Roles:        []string{roles},
+		Roles:        []string{strconv.Itoa(roles)},
 		Introduction: introduction,
 		Name:         name,
 		StandardClaims: jwt.StandardClaims{
