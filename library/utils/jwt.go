@@ -8,31 +8,38 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-var jwtSecret []byte
+var (
+	jwtSecret []byte
+	jwtExpire time.Duration = 3 * time.Hour
+)
 
 type Claims struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Avatar       string   `json:"avatar"`
+	Roles        []string `json:"role"`
+	Introduction string   `json:"introduction"`
+	Name         string   `json:"name"`
 	jwt.StandardClaims
 }
 
 // GenerateToken generate tokens used for auth
-func GenerateToken(username, password string) (string, error) {
+//func GenerateToken(username, password string) (string, error) {
+func GenerateToken(name, avatar, roles, introduction string) (string, error) {
 	nowTime := time.Now()
-	expireTime := nowTime.Add(3 * time.Hour)
-
+	expireTime := nowTime.Add(jwtExpire)
+	//EncodeMD5(username),
+	//EncodeMD5(password),
 	claims := Claims{
-		EncodeMD5(username),
-		EncodeMD5(password),
-		jwt.StandardClaims{
+		Avatar:       avatar,
+		Roles:        []string{roles},
+		Introduction: introduction,
+		Name:         name,
+		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			Issuer:    "gin-blog",
 		},
 	}
-
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	token, err := tokenClaims.SignedString(jwtSecret)
-
 	return token, err
 }
 
@@ -41,13 +48,11 @@ func ParseToken(token string) (*Claims, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return jwtSecret, nil
 	})
-
 	if tokenClaims != nil {
 		if claims, ok := tokenClaims.Claims.(*Claims); ok && tokenClaims.Valid {
 			return claims, nil
 		}
 	}
-
 	return nil, err
 }
 

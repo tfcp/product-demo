@@ -20,6 +20,7 @@ func init() {
 		g.Config().GetString("database.demo.pass"),
 		g.Config().GetString("database.demo.host"),
 		g.Config().GetString("database.demo.name")))
+	Db.LogMode(g.Config().GetBool("database.demo.log"))
 	if err != nil {
 		fmt.Printf("models.Setup err: %v", err)
 		return

@@ -7,7 +7,7 @@ import (
 
 type Res struct {
 	Code    int         `json:"code"`
-	Message string      `json:"msg"`
+	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
 }
 
@@ -15,7 +15,7 @@ type Res struct {
 func Response(Ctx *gin.Context, ErrorMsg *code.Error, data interface{}) {
 	Ctx.JSON(200, Res{
 		Code:    ErrorMsg.Code,
-		Message: ErrorMsg.Msg,
+		Message: ErrorMsg.Message,
 		Data:    data,
 	})
 	return
