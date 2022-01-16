@@ -10,6 +10,7 @@ type User struct {
 	Name         string    `json:"name"`
 	Age          int       `json:"age"`
 	Sex          int       `json:"sex"`
+	Status       int       `json:"status"`
 	Role         int       `json:"role"`
 	Pwd          string    `json:"pwd"`
 	Avatar       string    `json:"avatar"`
@@ -45,10 +46,14 @@ func (this *User) OneUser(where map[string]interface{}) (User, error) {
 
 func (this *User) DeleteUser(where map[string]interface{}) error {
 	var user User
-	//err := model.Db.Where(where).First(&user).Error
 	err := model.Db.Where(where).Delete(&user).Error
 	if err != nil {
 		return err
 	}
+	return nil
+}
+
+func (this *User) UpdateUser(user User, update map[string]interface{}) error {
+	//model.Db.Update()
 	return nil
 }

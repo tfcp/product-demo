@@ -83,3 +83,24 @@ func UserDeleteApi(c *gin.Context) {
 	}
 	utils.Response(c, code.ErrSuccess, map[string]interface{}{})
 }
+
+type RequestUserChange struct {
+	Id     int `json:"id" form:"id" valid:"id      @required#id不能为空"`
+	Status int `json:"status" form:"status" valid:"status      @required#status不能为空"`
+}
+
+func UserChangeStatusApi(c *gin.Context) {
+	var reqUserUserChange RequestUserChange
+	c.Bind(&reqUserUserChange)
+	if err := gvalid.CheckStruct(c, reqUserUserChange, nil); err != nil {
+		utils.Response(c, code.ErrSystem, err.FirstString())
+		return
+	}
+	//hs := demo.NewUserService()
+	////err := hs.Delete(reqUserDelete.Id)
+	////if err != nil {
+	////	utils.Response(c, code.ErrSystem, err.Error())
+	////	return
+	////}
+	utils.Response(c, code.ErrSuccess, map[string]interface{}{})
+}

@@ -60,3 +60,6 @@ func (this *UserService) Delete(id int) error {
 	}
 	return nil
 }
+
+func (this *UserService) ChangeStatus(id, status int) error {
+}
