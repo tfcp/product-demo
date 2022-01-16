@@ -1,4 +1,4 @@
-package user
+package demo
 
 import (
 	"gf/app/internal/service/demo"

@@ -48,3 +48,15 @@ func (this *UserService) Info(token string) (map[string]interface{}, error) {
 	}
 	return resInfo, nil
 }
+
+func (this *UserService) Delete(id int) error {
+	whereDelete := map[string]interface{}{
+		"id": id,
+	}
+	err := this.userModel.DeleteUser(whereDelete)
+	if err != nil {
+		log.Logger.Errorf("UserService DeleteError: %v", err)
+		return err
+	}
+	return nil
+}

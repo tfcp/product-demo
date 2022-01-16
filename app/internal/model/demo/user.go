@@ -42,3 +42,13 @@ func (this *User) OneUser(where map[string]interface{}) (User, error) {
 	}
 	return user, nil
 }
+
+func (this *User) DeleteUser(where map[string]interface{}) error {
+	var user User
+	//err := model.Db.Where(where).First(&user).Error
+	err := model.Db.Where(where).Delete(&user).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}

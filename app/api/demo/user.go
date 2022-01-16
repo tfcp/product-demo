@@ -8,33 +8,6 @@ import (
 	"github.com/gogf/gf/util/gvalid"
 )
 
-type RequestUserInfo struct {
-	Name string `json:"name" form:"name" valid:"name      @required#name不能为空"`
-}
-
-func UserInfoApi(c *gin.Context) {
-	var reqHelloInfo RequestHelloInfo
-	c.Bind(&reqHelloInfo)
-	if err := gvalid.CheckStruct(c, reqHelloInfo, nil); err != nil {
-		utils.Response(c, code.ErrSystem, err.FirstString())
-		return
-	}
-	hs := demo.NewHelloService()
-	whereCondition := map[string]interface{}{
-		"name": reqHelloInfo.Name,
-	}
-	oneInfo, err := hs.One(whereCondition)
-	if err != nil {
-		utils.Response(c, code.ErrSystem, err.Error())
-		return
-	}
-	res := map[string]interface{}{
-		"result": oneInfo,
-	}
-
-	utils.Response(c, code.ErrSuccess, res)
-}
-
 type RequestUserList struct {
 	Name string `json:"name" form:"name"`
 	Sex  int    `json:"sex" form:"sex"`
@@ -64,4 +37,49 @@ func UserListApi(c *gin.Context) {
 		"result": ListInfo,
 	}
 	utils.Response(c, code.ErrSuccess, res)
+}
+
+type RequestUserDetail struct {
+	Id int `json:"id" form:"id" valid:"id      @required#id不能为空"`
+}
+
+func UserDetailApi(c *gin.Context) {
+	var reqUserDetail RequestUserDetail
+	c.Bind(&reqUserDetail)
+	if err := gvalid.CheckStruct(c, reqUserDetail, nil); err != nil {
+		utils.Response(c, code.ErrSystem, err.FirstString())
+		return
+	}
+	hs := demo.NewUserService()
+	whereCondition := map[string]interface{}{}
+	whereCondition["id"] = reqUserDetail.Id
+	userDetail, err := hs.One(whereCondition)
+	if err != nil {
+		utils.Response(c, code.ErrSystem, err.Error())
+		return
+	}
+	res := map[string]interface{}{
+		"result": userDetail,
+	}
+	utils.Response(c, code.ErrSuccess, res)
+}
+
+type RequestUserDelete struct {
+	Id int `json:"id" form:"id" valid:"id      @required#id不能为空"`
+}
+
+func UserDeleteApi(c *gin.Context) {
+	var reqUserDelete RequestUserDelete
+	c.Bind(&reqUserDelete)
+	if err := gvalid.CheckStruct(c, reqUserDelete, nil); err != nil {
+		utils.Response(c, code.ErrSystem, err.FirstString())
+		return
+	}
+	hs := demo.NewUserService()
+	err := hs.Delete(reqUserDelete.Id)
+	if err != nil {
+		utils.Response(c, code.ErrSystem, err.Error())
+		return
+	}
+	utils.Response(c, code.ErrSuccess, map[string]interface{}{})
 }

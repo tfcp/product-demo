@@ -2,7 +2,6 @@ package router
 
 import (
 	"gf/app/api/demo"
-	"gf/app/api/user"
 	"gf/app/middleware/cors"
 	"gf/app/middleware/jwt"
 	"github.com/gin-gonic/gin"
@@ -19,7 +18,9 @@ func InitRouter() {
 	dm.GET("/hello-list", demo.HelloListApi)
 	dm.GET("/hello-info", demo.HelloInfoApi)
 	dm.Any("/user-list", demo.UserListApi)
+	dm.Any("/user-detail", demo.UserDetailApi)
+	dm.Any("/user-delete", demo.UserDeleteApi)
 	us := Router.Group("user")
-	us.Any("/login", user.LoginApi)
-	us.Any("/info", user.InfoApi)
+	us.Any("/login", demo.LoginApi)
+	us.Any("/info", demo.InfoApi)
 }
