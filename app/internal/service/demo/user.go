@@ -4,6 +4,7 @@ import (
 	"gf/app/internal/model/demo"
 	"gf/library/log"
 	"gf/library/utils"
+	"time"
 )
 
 type UserService struct {
@@ -62,4 +63,36 @@ func (this *UserService) Delete(id int) error {
 }
 
 func (this *UserService) ChangeStatus(id, status int) error {
+	whereOne := map[string]interface{}{
+		"id": id,
+	}
+	user, err := this.userModel.OneUser(whereOne)
+	if err != nil {
+		log.Logger.Errorf("UserService ChangeStatus OneError: %v", err)
+		return err
+	}
+	updateMap := map[string]interface{}{
+		"status": status,
+	}
+	if err := this.userModel.UpdateUser(user, updateMap); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (this *UserService) Save(id, status int, name, avatar, introduction string) error {
+	if id > 0 {
+		// update
+		return nil
+	}
+	newUser := demo.User{
+		Name:         name,
+		Age:          0,
+		Sex:          0,
+		Status:       status,
+		Role:         0,
+		Pwd:          "",
+		Avatar:       avatar,
+		Introduction: introduction,
+	}
 }

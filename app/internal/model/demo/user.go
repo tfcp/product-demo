@@ -2,6 +2,7 @@ package demo
 
 import (
 	"gf/app/internal/model"
+	"github.com/jinzhu/gorm"
 	"time"
 )
 
@@ -30,6 +31,9 @@ func (this *User) ListUser(where map[string]interface{}) ([]*User, error) {
 	}
 	err := session.Where(where).Find(&users).Error
 	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return users, nil
+		}
 		return users, err
 	}
 	return users, nil
@@ -39,6 +43,9 @@ func (this *User) OneUser(where map[string]interface{}) (User, error) {
 	var user User
 	err := model.Db.Where(where).First(&user).Error
 	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return user, nil
+		}
 		return user, err
 	}
 	return user, nil
@@ -48,12 +55,27 @@ func (this *User) DeleteUser(where map[string]interface{}) error {
 	var user User
 	err := model.Db.Where(where).Delete(&user).Error
 	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil
+		}
 		return err
 	}
 	return nil
 }
 
+// ps: 当用结构体更新的时候，当结构体的值是""或者0，false等，就什么也不会更新。
 func (this *User) UpdateUser(user User, update map[string]interface{}) error {
-	//model.Db.Update()
+	err := model.Db.Model(&user).Update(update).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (this *User) CreateUser(user User) error {
+	err := model.Db.Create(&user).Error
+	if err != nil {
+		return err
+	}
 	return nil
 }

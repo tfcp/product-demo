@@ -20,6 +20,8 @@ func InitRouter() {
 	dm.Any("/user-list", demo.UserListApi)
 	dm.Any("/user-detail", demo.UserDetailApi)
 	dm.Any("/user-delete", demo.UserDeleteApi)
+	dm.POST("/user-change", demo.UserChangeStatusApi)
+	dm.POST("/user-save", demo.UserChangeStatusApi)
 	us := Router.Group("user")
 	us.Any("/login", demo.LoginApi)
 	us.Any("/info", demo.InfoApi)
