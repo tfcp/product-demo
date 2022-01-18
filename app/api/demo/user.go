@@ -106,8 +106,14 @@ func UserChangeStatusApi(c *gin.Context) {
 }
 
 type RequestUserSave struct {
-	Id     int `json:"id" form:"id" valid:"id      @required|integer|min:1#id不能为空"`
-	Status int `json:"status" form:"status" valid:"status      @required|integer|min:1#status不能为空"`
+	Id           int    `json:"id" form:"id" valid:"id      @required|integer|min:1#id不能为空"`
+	Status       int    `json:"status" form:"status" valid:"status      @required|integer|min:1#status不能为空"`
+	Role         int    `json:"role" form:"role" valid:"role      @required|integer|min:1#role不能为空"`
+	Sex          int    `json:"sex" form:"sex" valid:"sex      @required|integer|min:1#sex不能为空"`
+	Age          int    `json:"age" form:"age"`
+	Name         string `json:"name" form:"name" valid:"name      @required#name不能为空"`
+	Avatar       string `json:"avatar" form:"avatar"`
+	Introduction string `json:"introduction" form:"introduction" valid:"introduction      @required#introduction不能为空"`
 }
 
 func UserSaveApi(c *gin.Context) {
@@ -118,7 +124,14 @@ func UserSaveApi(c *gin.Context) {
 		return
 	}
 	hs := demo.NewUserService()
-	err := hs.ChangeStatus(reqUserSave.Id, reqUserSave.Status)
+	err := hs.Save(reqUserSave.Id,
+		reqUserSave.Status,
+		reqUserSave.Role,
+		reqUserSave.Sex,
+		reqUserSave.Age,
+		reqUserSave.Name,
+		reqUserSave.Avatar,
+		reqUserSave.Introduction)
 	if err != nil {
 		utils.Response(c, code.ErrSystem, err.Error())
 		return

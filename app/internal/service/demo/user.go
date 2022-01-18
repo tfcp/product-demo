@@ -4,7 +4,6 @@ import (
 	"gf/app/internal/model/demo"
 	"gf/library/log"
 	"gf/library/utils"
-	"time"
 )
 
 type UserService struct {
@@ -71,28 +70,66 @@ func (this *UserService) ChangeStatus(id, status int) error {
 		log.Logger.Errorf("UserService ChangeStatus OneError: %v", err)
 		return err
 	}
-	updateMap := map[string]interface{}{
-		"status": status,
-	}
-	if err := this.userModel.UpdateUser(user, updateMap); err != nil {
+
+	user.Status = status
+	if err := this.userModel.UpdateUser(user); err != nil {
+		log.Logger.Errorf("UserService ChangeStatus UpdateUserError: %v", err)
 		return err
 	}
 	return nil
 }
 
-func (this *UserService) Save(id, status int, name, avatar, introduction string) error {
-	if id > 0 {
-		// update
-		return nil
-	}
+func (this *UserService) Save(id, status, role, sex, age int, name, avatar, introduction string) error {
 	newUser := demo.User{
 		Name:         name,
-		Age:          0,
-		Sex:          0,
+		Age:          age,
+		Sex:          sex,
 		Status:       status,
-		Role:         0,
+		Role:         role,
 		Pwd:          "",
 		Avatar:       avatar,
 		Introduction: introduction,
 	}
+	if id > 0 {
+		// update
+		whereUp := map[string]interface{}{
+			"id": id,
+		}
+		userUp, err := this.userModel.OneUser(whereUp)
+		if err != nil {
+			log.Logger.Errorf("UserService Save OneUserError: %v", err)
+			return err
+		}
+		if status > 0 {
+			userUp.Status = status
+		}
+		if role > 0 {
+			userUp.Role = role
+		}
+		if sex > 0 {
+			userUp.Sex = sex
+		}
+		if age > 0 {
+			userUp.Age = age
+		}
+		if name != "" {
+			userUp.Name = name
+		}
+		if avatar != "" {
+			userUp.Avatar = avatar
+		}
+		if introduction != "" {
+			userUp.Introduction = introduction
+		}
+		if err := this.userModel.UpdateUser(userUp); err != nil {
+			log.Logger.Errorf("UserService Save UpdateUserError: %v", err)
+			return err
+		}
+		return nil
+	}
+	if err := this.userModel.CreateUser(newUser); err != nil {
+		log.Logger.Errorf("UserService Save CreateUserError: %v", err)
+		return nil
+	}
+	return nil
 }

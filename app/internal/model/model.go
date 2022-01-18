@@ -5,6 +5,7 @@ import (
 	"github.com/gogf/gf/frame/g"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"time"
 )
 
 var Db *gorm.DB
@@ -33,5 +34,30 @@ func init() {
 	Db.SingularTable(true)
 	Db.DB().SetMaxIdleConns(10)
 	Db.DB().SetMaxOpenConns(100)
+	Db.DB().SetConnMaxLifetime(time.Hour)
+	Db.Callback().Create().Replace("gorm:create_at", updateTimeStampForCreateCallback)
+	Db.Callback().Update().Replace("gorm:create_at", updateTimeStampForCreateCallback)
+
 	fmt.Print("db init success")
+}
+
+// 注册新建钩子在持久化之前
+func updateTimeStampForCreateCallback(scope *gorm.Scope) {
+	//if !scope.HasError() {
+	nowTime := time.Now().Format("2006-01-01 03:04:00")
+	fmt.Println("s:", nowTime)
+	if createTimeField, ok := scope.FieldByName("create_at"); ok {
+		fmt.Println("a", nowTime)
+		if createTimeField.IsBlank {
+			createTimeField.Set(nowTime)
+		}
+	}
+	//}
+}
+
+// 注册更新钩子在持久化之前
+func updateTimeStampForUpdateCallback(scope *gorm.Scope) {
+	if _, ok := scope.Get("gorm:update_at"); !ok {
+		scope.SetColumn("UpdatedTime", time.Now().Unix())
+	}
 }

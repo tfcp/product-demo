@@ -3,20 +3,21 @@ package demo
 import (
 	"gf/app/internal/model"
 	"github.com/jinzhu/gorm"
-	"time"
 )
+
+// gorm文档: https://www.tizi365.com/archives/22.html
 
 type User struct {
 	*model.Model
-	Name         string    `json:"name"`
-	Age          int       `json:"age"`
-	Sex          int       `json:"sex"`
-	Status       int       `json:"status"`
-	Role         int       `json:"role"`
-	Pwd          string    `json:"pwd"`
-	Avatar       string    `json:"avatar"`
-	Introduction string    `json:"introduction"`
-	CreateAt     time.Time `json:"create_at"`
+	Name         string `json:"name"`
+	Age          int    `json:"age"`
+	Sex          int    `json:"sex"`
+	Status       int    `json:"status"`
+	Role         int    `json:"role"`
+	Pwd          string `json:"pwd"`
+	Avatar       string `json:"avatar"`
+	Introduction string `json:"introduction"`
+	CreateAt     string `json:"create_at"`
 }
 
 func (this *User) ListUser(where map[string]interface{}) ([]*User, error) {
@@ -64,8 +65,12 @@ func (this *User) DeleteUser(where map[string]interface{}) error {
 }
 
 // ps: 当用结构体更新的时候，当结构体的值是""或者0，false等，就什么也不会更新。
-func (this *User) UpdateUser(user User, update map[string]interface{}) error {
-	err := model.Db.Model(&user).Update(update).Error
+//func (this *User) UpdateUser(user User, update map[string]interface{}) error {
+func (this *User) UpdateUser(user User) error {
+	// 更新单个值
+	//err := model.Db.Model(&user).Update(update).Error
+	// 更新模型
+	err := model.Db.Save(&user).Error
 	if err != nil {
 		return err
 	}
