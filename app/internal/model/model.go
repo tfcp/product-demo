@@ -11,7 +11,8 @@ import (
 var Db *gorm.DB
 
 type Model struct {
-	ID int `gorm:"primary_key" json:"id"`
+	ID       int    `gorm:"primary_key" json:"id"`
+	CreateAt string `json:"create_at"`
 }
 
 func init() {
@@ -35,8 +36,9 @@ func init() {
 	Db.DB().SetMaxIdleConns(10)
 	Db.DB().SetMaxOpenConns(100)
 	Db.DB().SetConnMaxLifetime(time.Hour)
-	Db.Callback().Create().Replace("gorm:create_at", updateTimeStampForCreateCallback)
-	Db.Callback().Update().Replace("gorm:create_at", updateTimeStampForCreateCallback)
+	//Db.Callback().Create().After("gorm:create_at", updateTimeStampForCreateCallback)
+	//Db.Callback().Create().After("gorm:create_at", updateTimeStampForCreateCallback)
+	//Db.Callback().Update().After("updateTimeStampForCreateCallback")
 
 	fmt.Print("db init success")
 }
@@ -46,11 +48,12 @@ func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 	//if !scope.HasError() {
 	nowTime := time.Now().Format("2006-01-01 03:04:00")
 	fmt.Println("s:", nowTime)
-	if createTimeField, ok := scope.FieldByName("create_at"); ok {
+	if createTimeField, ok := scope.FieldByName("CreateAt"); ok {
 		fmt.Println("a", nowTime)
-		if createTimeField.IsBlank {
-			createTimeField.Set(nowTime)
-		}
+		//if createTimeField.IsBlank {
+		fmt.Println(3344)
+		createTimeField.Set(nowTime)
+		//}
 	}
 	//}
 }

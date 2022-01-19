@@ -70,9 +70,7 @@ func (this *UserService) ChangeStatus(id, status int) error {
 		log.Logger.Errorf("UserService ChangeStatus OneError: %v", err)
 		return err
 	}
-
-	user.Status = status
-	if err := this.userModel.UpdateUser(user); err != nil {
+	if err := this.userModel.UpdateUser(user, map[string]interface{}{"status": status}); err != nil {
 		log.Logger.Errorf("UserService ChangeStatus UpdateUserError: %v", err)
 		return err
 	}
@@ -100,28 +98,29 @@ func (this *UserService) Save(id, status, role, sex, age int, name, avatar, intr
 			log.Logger.Errorf("UserService Save OneUserError: %v", err)
 			return err
 		}
+		upMap := map[string]interface{}{}
 		if status > 0 {
-			userUp.Status = status
+			upMap["status"] = status
 		}
 		if role > 0 {
-			userUp.Role = role
+			upMap["role"] = role
 		}
 		if sex > 0 {
-			userUp.Sex = sex
+			upMap["sex"] = sex
 		}
 		if age > 0 {
-			userUp.Age = age
+			upMap["age"] = age
 		}
 		if name != "" {
-			userUp.Name = name
+			upMap["name"] = name
 		}
 		if avatar != "" {
-			userUp.Avatar = avatar
+			upMap["avatar"] = avatar
 		}
 		if introduction != "" {
-			userUp.Introduction = introduction
+			upMap["introduction"] = introduction
 		}
-		if err := this.userModel.UpdateUser(userUp); err != nil {
+		if err := this.userModel.UpdateUser(userUp, upMap); err != nil {
 			log.Logger.Errorf("UserService Save UpdateUserError: %v", err)
 			return err
 		}

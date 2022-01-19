@@ -17,7 +17,6 @@ type User struct {
 	Pwd          string `json:"pwd"`
 	Avatar       string `json:"avatar"`
 	Introduction string `json:"introduction"`
-	CreateAt     string `json:"create_at"`
 }
 
 func (this *User) ListUser(where map[string]interface{}) ([]*User, error) {
@@ -66,11 +65,12 @@ func (this *User) DeleteUser(where map[string]interface{}) error {
 
 // ps: 当用结构体更新的时候，当结构体的值是""或者0，false等，就什么也不会更新。
 //func (this *User) UpdateUser(user User, update map[string]interface{}) error {
-func (this *User) UpdateUser(user User) error {
-	// 更新单个值
+func (this *User) UpdateUser(user User, upMap map[string]interface{}) error {
+	// 更新具体值
 	//err := model.Db.Model(&user).Update(update).Error
+	err := model.Db.Model(&user).Update(upMap).Error
 	// 更新模型
-	err := model.Db.Save(&user).Error
+	//err := model.Db.Update(&user).Error
 	if err != nil {
 		return err
 	}
