@@ -25,7 +25,7 @@ linters:
   enable:
     - gofmt
     - govet
-    #    - goimports
+    - goimports
     #    - typecheck
     #    - unused
     #    - staticcheck

@@ -12,8 +12,8 @@ ENV APP_NAME project
 ENV APP_ROOT /var/www
 ENV APP_PATH $APP_ROOT/$APP_NAME
 ENV CONFIG_PATH $APP_PATH/config
-ENV LOG_ROOT /var/log/medlinker
-ENV LOG_PATH /var/log/medlinker/$APP_NAME
+ENV LOG_ROOT /var/log/project
+ENV LOG_PATH /var/log/project/$APP_NAME
 ENV PATH $APP_PATH/scripts:$PATH
 ENV CONFIG_CENTER_BASE_URL http://consul.infra.svc.cluster.local:8500
 

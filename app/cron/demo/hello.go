@@ -2,6 +2,6 @@ package demo
 
 import "fmt"
 
-func HelloCron() {
-	fmt.Println("this is demo-hello cronjob")
+func HelloDemoCron() {
+	fmt.Println("this is demo-hello cron-job")
 }
