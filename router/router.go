@@ -4,14 +4,21 @@ import (
 	"gf/app/api/demo"
 	"gf/app/middleware/cors"
 	"gf/app/middleware/jwt"
+	//_ "gf/app/statik"
+	"gf/library/utils"
+	rice "github.com/GeertJohan/go.rice"
 	"github.com/gin-gonic/gin"
 )
 
-var Router *gin.Engine
+var (
+	Router *gin.Engine
+)
 
-func InitRouter() {
+func RegisterRouter() {
 	Router = gin.Default()
 	Router.Use(cors.Cors())
+	fs := utils.EmbeddingFileSystem(rice.MustFindBox("../web/dist").HTTPBox())
+	Router.Use(utils.Serve("", fs))
 
 	dm := Router.Group("demo")
 	dm.Use(jwt.JWT())

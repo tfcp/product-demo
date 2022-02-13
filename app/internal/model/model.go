@@ -19,6 +19,7 @@ type Model struct {
 }
 
 func init() {
+
 	var err error
 	Db, err = gorm.Open(g.Config().GetString("database.demo.type"), fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		g.Config().GetString("database.demo.user"),

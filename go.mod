@@ -3,7 +3,8 @@ module gf
 go 1.14
 
 require (
-	github.com/EDDYCJY/go-gin-example v0.0.0-20201228125222-28f372bf41f9
+	github.com/EDDYCJY/go-gin-example v0.0.0-20201228125222-28f372bf41f9 // indirect
+	github.com/GeertJohan/go.rice v1.0.2
 	github.com/OpenPeeDeeP/depguard v1.1.0 // indirect
 	github.com/ashanbrown/forbidigo v1.3.0 // indirect
 	github.com/ashanbrown/makezero v1.1.0 // indirect
@@ -35,6 +36,7 @@ require (
 	github.com/prometheus/client_golang v1.12.0 // indirect
 	github.com/quasilyte/gogrep v0.0.0-20220120141003-628d8b3623b5 // indirect
 	github.com/quasilyte/regex/syntax v0.0.0-20210819130434-b3f0c404a727 // indirect
+	github.com/rakyll/statik v0.1.7
 	github.com/sanposhiho/wastedassign/v2 v2.0.7 // indirect
 	github.com/securego/gosec/v2 v2.9.6 // indirect
 	github.com/spf13/afero v1.8.0 // indirect
@@ -46,6 +48,7 @@ require (
 	github.com/tommy-muehle/go-mnd/v2 v2.5.0 // indirect
 	gopkg.in/ini.v1 v1.66.3 // indirect
 	honnef.co/go/tools v0.2.2 // indirect
+	k8s.io/client-go v12.0.0+incompatible
 	mvdan.cc/gofumpt v0.2.1 // indirect
 	mvdan.cc/unparam v0.0.0-20211214103731-d0ef000c54e5 // indirect
 )
