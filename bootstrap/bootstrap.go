@@ -15,7 +15,7 @@ func Run() {
 	if err := gredis.Setup(); err != nil {
 		log.Logger.Fatalf("redis init error:%v", err)
 	}
-	router.InitRouter()
+	router.RegisterRouter()
 	addr := g.Config().GetString("api.addr")
 	if err := router.Router.Run(addr); err != nil {
 		g.Log().Fatal(err)

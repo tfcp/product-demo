@@ -1,8 +1,7 @@
 package demo
 
 import (
-	"gf/library/log"
-	"github.com/gogf/gf/os/gcron"
+	"gf/library/utils"
 )
 
 // (Seconds Minutes Hours Day Month Week)
@@ -13,10 +12,6 @@ import (
 // 0 * * * * *		: 每分钟执行
 
 func CronDemo() {
-	_, err := gcron.Add("*/5 * * * * *", func() {
-		HelloCron()
-	}, "DemoHelloCron")
-	if err != nil {
-		log.Logger.Errorf("DemoHelloCron Start Error: %v", err)
-	}
+	// cron demo
+	utils.AddCron("*/5 * * * * *", "HelloDemoCron", HelloDemoCron)
 }
