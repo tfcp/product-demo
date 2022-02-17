@@ -4,7 +4,6 @@ import (
 	"gf/app/api/demo"
 	"gf/app/middleware/cors"
 	"gf/app/middleware/jwt"
-	//_ "gf/app/statik"
 	"gf/library/utils"
 	rice "github.com/GeertJohan/go.rice"
 	"github.com/gin-gonic/gin"

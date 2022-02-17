@@ -4,8 +4,8 @@
 build:
 	go build main.go
 
-.PHONY: run
-run:
+.PHONY: server
+server:
 	go run main.go server
 
 .PHONY: cron
