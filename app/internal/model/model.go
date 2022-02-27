@@ -21,30 +21,39 @@ type Model struct {
 func init() {
 
 	var err error
-	Db, err = gorm.Open(g.Config().GetString("database.demo.type"), fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
-		g.Config().GetString("database.demo.user"),
-		g.Config().GetString("database.demo.pass"),
-		g.Config().GetString("database.demo.host"),
-		g.Config().GetString("database.demo.name")))
-	Db.LogMode(g.Config().GetBool("database.demo.log"))
+	Db, err = setupDb(Db, "demo")
 	if err != nil {
 		fmt.Println(fmt.Sprintf("models.Setup err: %v", err))
 		return
 	}
 
+	fmt.Println("db init end...")
+}
+
+func setupDb(db *gorm.DB, dbName string) (*gorm.DB, error) {
+	var err error
+	db, err = gorm.Open(g.Config().GetString("database."+dbName+".type"), fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
+		g.Config().GetString("database."+dbName+".user"),
+		g.Config().GetString("database."+dbName+".pass"),
+		g.Config().GetString("database."+dbName+".host"),
+		g.Config().GetString("database."+dbName+".name")))
+	if err != nil {
+		return nil, err
+	}
+	db.LogMode(g.Config().GetBool("database." + dbName + ".log"))
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
-		return g.Config().GetString("database.demo.prefix") + defaultTableName
+		return g.Config().GetString("database."+dbName+".prefix") + defaultTableName
 	}
 
-	Db.SingularTable(true)
-	Db.DB().SetMaxIdleConns(10)
-	Db.DB().SetMaxOpenConns(100)
-	Db.DB().SetConnMaxLifetime(time.Hour)
+	db.SingularTable(true)
+	db.DB().SetMaxIdleConns(10)
+	db.DB().SetMaxOpenConns(100)
+	db.DB().SetConnMaxLifetime(time.Hour)
 	//Db.Callback().Create().After("gorm:create_at", updateTimeStampForCreateCallback)
 	//Db.Callback().Create().After("gorm:create_at", updateTimeStampForCreateCallback)
 	//Db.Callback().Update().After("updateTimeStampForCreateCallback")
-
-	fmt.Println("db init success")
+	fmt.Println("db init success: ", dbName)
+	return db, nil
 }
 
 // 注册新建钩子在持久化之前
