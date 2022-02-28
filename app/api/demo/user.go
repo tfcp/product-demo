@@ -1,6 +1,7 @@
 package demo
 
 import (
+	"gf/app/api"
 	"gf/app/internal/service/demo"
 	"gf/library/code"
 	"gf/library/utils"
@@ -9,8 +10,9 @@ import (
 )
 
 type RequestUserList struct {
-	Name string `json:"name" form:"name"`
-	Sex  int    `json:"sex" form:"sex"`
+	Name          string `json:"name" form:"name"`
+	Sex           int    `json:"sex" form:"sex"`
+	reqCommonList *api.ReqCommonList
 }
 
 func UserListApi(c *gin.Context) {
@@ -28,7 +30,7 @@ func UserListApi(c *gin.Context) {
 	if reqUserList.Sex != 0 {
 		whereCondition["sex"] = reqUserList.Sex
 	}
-	ListInfo, err := hs.List(whereCondition)
+	ListInfo, err := hs.List(whereCondition, reqUserList.reqCommonList.Page, reqUserList.reqCommonList.PageSize)
 	if err != nil {
 		utils.Response(c, code.ErrSystem, err.Error())
 		return

@@ -19,9 +19,8 @@ type User struct {
 	Introduction string `json:"introduction"`
 }
 
-func (this *User) ListUser(where map[string]interface{}) ([]*User, error) {
+func (this *User) ListUser(where map[string]interface{}, page, size int) ([]*User, error) {
 	var users []*User
-	model.Db.LogMode(true)
 	session := model.Db
 	// like search
 	name, ok := where["name"]
@@ -29,7 +28,7 @@ func (this *User) ListUser(where map[string]interface{}) ([]*User, error) {
 		session = session.Where("name LIKE ?", name.(string)+"%")
 		delete(where, "name")
 	}
-	err := session.Where(where).Find(&users).Error
+	err := session.Where(where).Offset().Limit().Find(&users).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return users, nil

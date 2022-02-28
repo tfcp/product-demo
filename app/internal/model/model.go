@@ -18,6 +18,13 @@ type Model struct {
 	CreateAt string `json:"create_at"`
 }
 
+func (this *Model) GetOffset(page, size int) int {
+	if page < 1 {
+		page = 1
+	}
+	return (page - 1) * size
+}
+
 func init() {
 
 	var err error
@@ -42,7 +49,8 @@ func setupDb(db *gorm.DB, dbName string) (*gorm.DB, error) {
 	}
 	db.LogMode(g.Config().GetBool("database." + dbName + ".log"))
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
-		return g.Config().GetString("database."+dbName+".prefix") + defaultTableName
+		//return g.Config().GetString("database."+dbName+".prefix") + defaultTableName
+		return g.Config().GetString("database.prefix") + defaultTableName
 	}
 
 	db.SingularTable(true)

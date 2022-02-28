@@ -16,8 +16,8 @@ func NewUserService() (s *UserService) {
 	return h
 }
 
-func (this *UserService) List(where map[string]interface{}) ([]*demo.User, error) {
-	list, err := this.userModel.ListUser(where)
+func (this *UserService) List(where map[string]interface{}, page, size int) ([]*demo.User, error) {
+	list, err := this.userModel.ListUser(where, page, size)
 	if err != nil {
 		log.Logger.Errorf("UserService ListError: %v", err)
 		return nil, err
