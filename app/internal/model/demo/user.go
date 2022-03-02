@@ -21,14 +21,8 @@ type User struct {
 
 func (this *User) ListUser(where map[string]interface{}, page, size int) ([]*User, error) {
 	var users []*User
-	session := model.Db
-	// like search
-	name, ok := where["name"]
-	if ok {
-		session = session.Where("name LIKE ?", name.(string)+"%")
-		delete(where, "name")
-	}
-	err := session.Where(where).Offset().Limit().Find(&users).Error
+	session := this.CommonWhere(where)
+	err := session.Where(where).Offset(this.GetOffset(page, size)).Limit(size).Find(&users).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return users, nil
@@ -36,6 +30,19 @@ func (this *User) ListUser(where map[string]interface{}, page, size int) ([]*Use
 		return users, err
 	}
 	return users, nil
+}
+
+func (this *User) CountUser(where map[string]interface{}) (int, error) {
+	var count int
+	session := this.CommonWhere(where)
+	err := session.Model(this).Where(where).Count(&count).Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return count, nil
+		}
+		return count, err
+	}
+	return count, nil
 }
 
 func (this *User) OneUser(where map[string]interface{}) (User, error) {

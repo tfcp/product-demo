@@ -25,6 +25,22 @@ func (this *Model) GetOffset(page, size int) int {
 	return (page - 1) * size
 }
 
+// common where condition
+func (this *Model) CommonWhere(where map[string]interface{}) *gorm.DB {
+	db := DbSre
+	// like search
+	if _, ok := where["name"]; ok {
+		db = db.Where("name like ?", "%"+where["name"].(string)+"%")
+		delete(where, "name")
+	}
+	return db
+}
+
+// filter form (dont let 0 or "" business)
+func (this *Model) FilterBlankForm() *Model {
+	return this
+}
+
 func init() {
 
 	var err error
