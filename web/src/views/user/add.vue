@@ -1,18 +1,25 @@
 <template>
   <div class="app-container">
-    <el-form ref="user" :model="form" label-width="120px">
-      <el-form-item label="姓名">
-        <el-input v-model="form.name" />
+    <el-form ref="userRule" :model="form" :rules="rules" label-width="120px">
+      <el-form-item label="姓名" prop="name">
+        <el-input v-model="form.name"  placeholder="请填写姓名" />
       </el-form-item>
       <el-form-item label="性别">
-        <el-select v-model="form.sex" placeholder="请选择性别" @change="getChange">
-          <el-option
-            v-for="item in sexList"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
+        <el-col :span="10">
+          <el-select v-model="form.sex" placeholder="请选择性别" @change="getChange">
+            <el-option
+              v-for="item in sexList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="10" >
+          <el-form-item label="年龄" prop="age">
+            <el-input v-model="form.age" placeholder="请填写年龄" />
+          </el-form-item>
+        </el-col>
       </el-form-item>
       <el-form-item label="状态">
         <el-switch
@@ -55,10 +62,20 @@ export default {
       form: {
         id: 0,
         name: '',
-        age: 1,
+        age: "",
         role: 1,
         introduction: '',
         status: "2"
+      },
+      rules: {
+        name: [
+          { required: true, message: '请输入用户名称', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        ],
+        age: [
+          { required: true, message: '请填写年龄', trigger: 'blur' },
+          { type: 'number', message: '请填写数字', trigger: 'blur', transform: (value) => Number(value)},
+        ],
       }
     }
   },
@@ -90,17 +107,32 @@ export default {
       }
     },
     onSubmit() {
-      save(this.form).then(response => {
-        this.$message('提交成功!')
-        this.$router.push('/user/list')
-      })
+      this.$refs["userRule"].validate((valid) => {
+        if (valid) {
+          save(this.form).then(response => {
+            this.$message({
+              message: '提交成功',
+              type: 'success'
+            });
+            this.$router.push('/user/list')
+          })
+        } else {
+          this.$message({
+            message: '参数有误!',
+            type: 'warning'
+          });
+          return false;
+        }
+      });
+
     },
     onClear() {
       this.form.name = ""
-      this.form.role = ""
+      this.form.role = 2
+      this.form.age = ""
       this.form.introduction = ""
       this.form.sex = ""
-      this.form.status = ""
+      this.form.status = 2
       this.$message({
         message: '清除成功!',
         type: 'warning'

@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form :inline="true" >
+      <el-form :inline="true">
         <el-row>
           <el-form-item label="名称">
             <el-input v-model.trim="searchParams.name"></el-input>
@@ -18,7 +18,8 @@
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="fetchData()">搜索</el-button>
+            <el-button type="primary" icon="el-icon-search" @click="fetchData()">搜索</el-button>
+            <el-button type="success" @click="toEdit(0)">创建</el-button>
           </el-form-item>
         </el-row>
       </el-form>
@@ -31,10 +32,11 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
+      <el-table-column
+        type="index"
+        align="center"
+        label="ID"
+        width="50">
       </el-table-column>
       <el-table-column label="名称" >
         <template slot-scope="scope">
@@ -74,8 +76,8 @@
       <el-table-column align="center" label="操作" width="220">
         <template slot-scope="scope">
           <el-row>
-            <el-button type="info" @click="toEdit(scope.row.id)">编辑</el-button>
-            <el-button type="danger" @click="remove(scope.row.id)">删除</el-button>
+            <el-button type="info" icon="el-icon-edit" @click="toEdit(scope.row.id)">编辑</el-button>
+            <el-button type="danger" icon="el-icon-delete" @click="remove(scope.row.id)">删除</el-button>
           </el-row>
         </template>
       </el-table-column>
@@ -156,12 +158,11 @@
       },
       toEdit (id) {
         let path = ''
-        path = '/user/add?id='+id
-        // if (item === null) {
-        //   path = '/user/add'
-        // } else {
-        //   path = `/user/add/${item.id}`
-        // }
+        if (id === 0) {
+          path = '/user/add'
+        } else {
+          path = '/user/add?id='+id
+        }
         this.$router.push(path)
       }
     }

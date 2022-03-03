@@ -27,7 +27,7 @@ func (this *Model) GetOffset(page, size int) int {
 
 // common where condition
 func (this *Model) CommonWhere(where map[string]interface{}) *gorm.DB {
-	db := DbSre
+	db := Db
 	// like search
 	if _, ok := where["name"]; ok {
 		db = db.Where("name like ?", "%"+where["name"].(string)+"%")

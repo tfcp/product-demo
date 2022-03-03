@@ -12,7 +12,7 @@ gf and gin project template...
     统一后台前端解决方案
     文档: https://panjiachen.github.io/vue-element-admin-site/zh/guide
 
-3.Element
+3.Element-Ui
     
     vue2.0 前端组件库
     文档: https://element.eleme.cn/#/zh-CN/component/installation
