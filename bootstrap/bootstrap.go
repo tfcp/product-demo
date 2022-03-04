@@ -11,8 +11,7 @@ import (
 	"github.com/gogf/gf/frame/g"
 )
 
-// web project
-func Run() {
+func bootstrap() {
 	log.Setup()
 	if err := gredis.Setup(); err != nil {
 		log.Logger.Fatalf("redis init error:%v", err)
@@ -21,6 +20,11 @@ func Run() {
 		log.Logger.Fatalf("db init error:%v", err)
 		return
 	}
+}
+
+// web project
+func Run() {
+	bootstrap()
 	router.RegisterRouter()
 	addr := g.Config().GetString("api.addr")
 	if err := router.Router.Run(addr); err != nil {
@@ -30,12 +34,14 @@ func Run() {
 
 // cronjob
 func RunCron() {
+	bootstrap()
 	cron.Cron()
 	select {}
 }
 
 // consumer
 func RunProcess() {
+	bootstrap()
 	process.Process()
 	select {}
 }

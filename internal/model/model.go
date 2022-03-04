@@ -10,8 +10,7 @@ import (
 )
 
 var (
-	Db    *gorm.DB
-	DbSre *gorm.DB
+	Db *gorm.DB
 )
 
 type Model struct {
