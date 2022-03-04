@@ -1,6 +1,6 @@
 package demo
 
-import "gf/app/internal/model"
+import "gf/internal/model"
 
 type Hello struct {
 	*model.Model

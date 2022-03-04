@@ -1,7 +1,7 @@
 package demo
 
 import (
-	"gf/app/internal/service/demo"
+	"gf/internal/service/demo"
 	"gf/library/code"
 	"gf/library/utils"
 	"github.com/gin-gonic/gin"

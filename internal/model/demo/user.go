@@ -1,7 +1,7 @@
 package demo
 
 import (
-	"gf/app/internal/model"
+	"gf/internal/model"
 	"github.com/jinzhu/gorm"
 )
 

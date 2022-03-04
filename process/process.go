@@ -1,6 +1,6 @@
 package process
 
-import "gf/app/process/demo"
+import "gf/process/demo"
 
 // consumer process
 func Process() {

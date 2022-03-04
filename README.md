@@ -30,22 +30,21 @@ gf and gin project template...
 
 ## 项目结构
 
-    |--app
-        |--api          接口目录
-        |--cron         任务目录
-        |--process      进程目录
-        |--middleware   中间件目录
-        |--internal
-            |--enum     常量
-            |--model    模型
-            |--service  服务
+    |--api          接口目录
+    |--cron         任务目录
+    |--process      进程目录
+    |--middleware   中间件目录
+    |--internal
+        |--enum     常量
+        |--model    模型
+        |--service  服务
     |--config
     |--bootstrap
     |--library
     |--logs
     |--router
     |--web
-    |--Makefile         快捷命令
+    |--Makefile     快捷命令
     |--main.go
 
 ## 常用命令

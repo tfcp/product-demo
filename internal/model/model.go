@@ -5,6 +5,7 @@ import (
 	"github.com/gogf/gf/frame/g"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/pkg/errors"
 	"time"
 )
 
@@ -41,19 +42,16 @@ func (this *Model) FilterBlankForm() *Model {
 	return this
 }
 
-func init() {
-
+func Setup() error {
 	var err error
-	Db, err = setupDb(Db, "demo")
+	Db, err = setDb(Db, "demo")
 	if err != nil {
-		fmt.Println(fmt.Sprintf("models.Setup err: %v", err))
-		return
+		return errors.New(fmt.Sprintf("models.Setup err: %v", err))
 	}
-
-	fmt.Println("db init end...")
+	return nil
 }
 
-func setupDb(db *gorm.DB, dbName string) (*gorm.DB, error) {
+func setDb(db *gorm.DB, dbName string) (*gorm.DB, error) {
 	var err error
 	db, err = gorm.Open(g.Config().GetString("database."+dbName+".type"), fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		g.Config().GetString("database."+dbName+".user"),

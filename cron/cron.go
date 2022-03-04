@@ -1,7 +1,7 @@
 package cron
 
 import (
-	"gf/app/cron/demo"
+	"gf/cron/demo"
 )
 
 // (Seconds Minutes Hours Day Month Week)

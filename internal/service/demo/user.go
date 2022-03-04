@@ -1,7 +1,7 @@
 package demo
 
 import (
-	"gf/app/internal/model/demo"
+	"gf/internal/model/demo"
 	"gf/library/log"
 	"gf/library/utils"
 )

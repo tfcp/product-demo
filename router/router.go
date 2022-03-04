@@ -1,9 +1,9 @@
 package router
 
 import (
-	"gf/app/api/demo"
-	"gf/app/middleware/cors"
-	"gf/app/middleware/jwt"
+	"gf/api/demo"
+	"gf/internal/middleware/cors"
+	"gf/internal/middleware/jwt"
 	"gf/library/utils"
 	rice "github.com/GeertJohan/go.rice"
 	"github.com/gin-gonic/gin"
