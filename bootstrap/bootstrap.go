@@ -75,7 +75,7 @@ Usage:
 			return
 		}
 		table = opts["t"]
-		tools.OrmGenTool(table, database)
+		tools.OrmGenTools(table, database)
 	}
 
 }
