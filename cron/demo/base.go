@@ -1,8 +1,6 @@
 package demo
 
-import (
-	"gf/library/utils"
-)
+import "gf/library/utils"
 
 // (Seconds Minutes Hours Day Month Week)
 // @hourly @daily @weekly @monthly @yearly
@@ -11,7 +9,18 @@ import (
 // */5 * * * * *	: 每分钟第2秒执行
 // 0 * * * * *		: 每分钟执行
 
+var (
+	cronStdoutTitle    = []string{"任务名称", "表达式"}
+	cronStdoutContents = [][]string{}
+)
+
 func CronDemo() {
-	// cron demo
-	utils.AddCron("*/5 * * * * *", "HelloDemoCron", HelloDemoCron)
+	cronStdoutContents = append(cronStdoutContents,
+		// cron demo
+		utils.AddCron("*/1 * * * * *", "HelloDemoCron1", HelloDemoCron),
+		utils.AddCron("*/2 * * * * *", "HelloDemoCron2", HelloDemoCron),
+	)
+
+	// stdout cron list
+	utils.TableStdout(cronStdoutTitle, cronStdoutContents)
 }

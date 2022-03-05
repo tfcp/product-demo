@@ -15,6 +15,7 @@ require (
 	github.com/fzipp/gocyclo v0.4.0 // indirect
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-critic/go-critic v0.6.2 // indirect
+	github.com/go-sql-driver/mysql v1.6.0
 	github.com/go-xmlfmt/xmlfmt v0.0.0-20211206191508-7fd73a941850 // indirect
 	github.com/go-xorm/xorm v0.7.9 // indirect
 	github.com/gogf/gf v1.16.6
@@ -31,6 +32,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/mgechev/revive v1.1.3 // indirect
 	github.com/nishanths/exhaustive v0.7.11 // indirect
+	github.com/olekukonko/tablewriter v0.0.5
 	github.com/pkg/errors v0.9.1
 	github.com/polyfloyd/go-errorlint v0.0.0-20211125173453-6d6d39c5bb8b // indirect
 	github.com/prometheus/client_golang v1.12.0 // indirect

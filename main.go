@@ -12,6 +12,7 @@ func main() {
 		"process": bootstrap.RunProcess,
 		"cron":    bootstrap.RunCron,
 		"help":    bootstrap.RunHelp,
+		"tools":   bootstrap.RunTools,
 	}); err != nil {
 		log.Logger.Fatal(err)
 	}
