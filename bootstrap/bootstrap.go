@@ -49,20 +49,29 @@ func RunProcess() {
 }
 
 func RunTools() {
-	toolArg := gcmd.GetArg(1, "tools")
+	//toolArg := gcmd.GetArg(1, "tools")
 	opts := gcmd.GetOptAll()
-	// go run main.go tools -t tableName -d database
+	toolName := gcmd.GetOpt("cmd", "orm")
+	switch toolName {
+	// ormGen tool
 	// -t: tableName
 	// -d: database if null is default
-	switch toolArg {
-	default:
+	case "orm":
 		database := "default"
 		table := ""
 		if _, ok := opts["d"]; ok {
 			database = opts["d"]
 		}
 		if _, ok := opts["t"]; !ok {
-			fmt.Println("-t is null,please input")
+			fmt.Println(`
+this a quick orm generate tools.
+
+Usage:
+
+	go run main.go tools -t tableName -d databaseName
+
+
+				`)
 			return
 		}
 		table = opts["t"]

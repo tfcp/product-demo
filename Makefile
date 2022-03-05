@@ -20,6 +20,10 @@ process:
 web:
 	cd web/ && npm run dev
 
+.PHONY: tools
+tools:
+	go run main.go tools
+
 .PHONY: build-static
 build-static:
 	cd web/ && npm run build:prod
