@@ -20,7 +20,7 @@ type Table2Struct struct {
 	err             error
 	realNameMethod  string
 	enableJsonTag   bool   // 是否添加json的tag, 默认不添加
-	enableGfMethod  bool   // 是否生成method(Gf orm)
+	enableOrmMethod bool   // 是否生成method(Gf orm)
 	enableGinMethod bool   // 是否生成method(Gin orm)
 	packageName     string // 生成struct的包名(默认为空的话, 则取名为: package model)
 }
@@ -90,8 +90,8 @@ func (t *Table2Struct) EnableJsonTag(p bool) *Table2Struct {
 /**
  * 是否生成Gf orm方法
  */
-func (t *Table2Struct) MakeGfMethod(p bool) *Table2Struct {
-	t.enableGfMethod = p
+func (t *Table2Struct) MakeOrmMethod(p bool) *Table2Struct {
+	t.enableOrmMethod = p
 	// 只能有一种生效
 	if p == true {
 		t.enableGinMethod = false
@@ -106,7 +106,7 @@ func (t *Table2Struct) MakeGinMethod(p bool) *Table2Struct {
 	t.enableGinMethod = p
 	// 只能有一种生效
 	if p == true {
-		t.enableGfMethod = false
+		t.enableOrmMethod = false
 	}
 	return t
 }
@@ -167,6 +167,8 @@ func (t *Table2Struct) Run() error {
 		//}
 		depth := 1
 		structContent += "type " + t.camelCase(tableName) + " struct {\n"
+		structContent += "	*model.Model\n"
+
 		for _, v := range item {
 			//structContent += tab(depth) + v.ColumnName + " " + v.Type + " " + v.Json + "\n"
 			// 字段注释
@@ -200,16 +202,16 @@ func (t *Table2Struct) Run() error {
 	if strings.Contains(structContent, "time.Time") {
 		importContent = "import \"time\"\r\n"
 	}
-	// 引入Gf相关
-	if t.enableGfMethod {
-		importContent += "import \"database/sql\"\r\n"
-		importContent += "import \"github.com/gogf/gf/g\"\r\n"
-		var varString string
-		varString = "var (\r\n"
-		varString += "\n" + t.table + " = g.DB(\"" + t.GetDbName() + "\").Table(\"" + t.table + "\").Safe()\r\n"
-		varString += ")\r\n"
-		importContent += varString
-	}
+	// 引入import相关
+	//if t.enableOrmMethod {
+	//	importContent += "import \"database/sql\"\r\n"
+	//	importContent += "import \"github.com/gogf/gf/g\"\r\n"
+	//	var varString string
+	//	varString = "var (\r\n"
+	//	varString += "\n" + t.table + " = g.DB(\"" + t.GetDbName() + "\").Table(\"" + t.table + "\").Safe()\r\n"
+	//	varString += ")\r\n"
+	//	importContent += varString
+	//}
 
 	// 写入文件struct
 	var savePath = t.savePath
@@ -226,8 +228,8 @@ func (t *Table2Struct) Run() error {
 	defer f.Close()
 
 	funcString := "\r\n"
-	if t.enableGfMethod {
-		funcString = t.makeGfMethod()
+	if t.enableOrmMethod {
+		funcString = t.makeOrmMethod()
 	}
 
 	content := packageName + importContent + structContent + funcString
@@ -359,62 +361,71 @@ func tableToCap(tab string) {
 /**
  * 生成方法
  */
-func (t *Table2Struct) makeGfMethod() string {
+func (t *Table2Struct) makeOrmMethod() string {
 	methodStr := "\r\n"
-	// list add update delete one
+	// list create update delete one
 	methodStr += t.makeOneFuncStr()
 	methodStr += t.makeListFuncStr()
-	methodStr += t.makeAddFuncStr()
-	methodStr += t.makeDeleteFuncStr()
+	methodStr += t.makeCreateFuncStr()
 	methodStr += t.makeUpdateFuncStr()
+	methodStr += t.makeDeleteFuncStr()
 	return methodStr
 }
 
+// todo demo
+//func (t *Table2Struct) makeOneFuncStr() string {
+//	tableName := t.camelCase(t.table)
+//	oneFuncStr := "\r\n"
+//	oneFuncStr += "func " + tableName + "One(condition interface{}) (*" + tableName + ",error){\r\n"
+//	oneFuncStr += tableName + ":= new(" + tableName + ")\r\n"
+//	oneFuncStr += "res, err := " + t.table + ".Where(condition).One()\r\n"
+//	oneFuncStr += "if err != nil {\r\n"
+//	oneFuncStr += "		if err == sql.ErrNoRows { \r\n return " + tableName + ", nil \r\n}\r\n"
+//	oneFuncStr += "return nil, err\r\n"
+//	oneFuncStr += "}\r\n"
+//	oneFuncStr += "	if err := res.ToStruct(" + tableName + "); err != nil { \r\nreturn nil, err \r\n}\r\n"
+//	oneFuncStr += "return " + tableName + ", nil"
+//	oneFuncStr += "}\r\n"
+//	oneFuncStr += "\r\n"
+//	return oneFuncStr
+//}
+
 func (t *Table2Struct) makeOneFuncStr() string {
 	tableName := t.camelCase(t.table)
-	oneFuncStr := "\r\n"
-	oneFuncStr += "func " + tableName + "One(condition interface{}) (*" + tableName + ",error){\r\n"
-	oneFuncStr += tableName + ":= new(" + tableName + ")\r\n"
-	oneFuncStr += "res, err := " + t.table + ".Where(condition).One()\r\n"
-	oneFuncStr += "if err != nil {\r\n"
-	oneFuncStr += "		if err == sql.ErrNoRows { \r\n return " + tableName + ", nil \r\n}\r\n"
-	oneFuncStr += "return nil, err\r\n"
-	oneFuncStr += "}\r\n"
-	oneFuncStr += "	if err := res.ToStruct(" + tableName + "); err != nil { \r\nreturn nil, err \r\n}\r\n"
-	oneFuncStr += "return " + tableName + ", nil"
+	oneFuncStr := "func " + "One" + tableName + "(where map[string]interface{}) (*" + tableName + ",error){\r\n"
 	oneFuncStr += "}\r\n"
 	oneFuncStr += "\r\n"
 	return oneFuncStr
 }
 
-func (t *Table2Struct) makeAddFuncStr() string {
-	tableName := t.camelCase(t.table)
-	addFuncStr := "func " + tableName + "Add(condition interface{}) (*" + tableName + ",error){\r\n"
-	addFuncStr += "}\r\n"
-	addFuncStr += "\r\n"
-	return addFuncStr
-}
-
 func (t *Table2Struct) makeDeleteFuncStr() string {
 	tableName := t.camelCase(t.table)
-	deleteFuncStr := "func " + tableName + "Delete(condition interface{}) (*" + tableName + ",error){\r\n"
+	deleteFuncStr := "func " + "Delete" + tableName + "(where map[string]interface{}) error {\r\n"
 	deleteFuncStr += "}\r\n"
 	deleteFuncStr += "\r\n"
 	return deleteFuncStr
 }
 
-func (t *Table2Struct) makeUpdateFuncStr() string {
-	tableName := t.camelCase(t.table)
-	updateFuncStr := "func " + tableName + "Update(condition interface{}) (*" + tableName + ",error){\r\n"
-	updateFuncStr += "}\r\n"
-	updateFuncStr += "\r\n"
-	return updateFuncStr
-}
-
 func (t *Table2Struct) makeListFuncStr() string {
 	tableName := t.camelCase(t.table)
-	listFuncStr := "func " + tableName + "List(condition interface{}) (*" + tableName + ",error){\r\n"
+	listFuncStr := "func " + "List" + tableName + "(where map[string]interface{}, page, size int) (*[]" + tableName + ",error){\r\n"
 	listFuncStr += "}\r\n"
 	listFuncStr += "\r\n"
 	return listFuncStr
+}
+
+func (t *Table2Struct) makeCreateFuncStr() string {
+	tableName := t.camelCase(t.table)
+	addFuncStr := "func " + "Create" + tableName + "(where map[string]interface{}) error {\r\n"
+	addFuncStr += "}\r\n"
+	addFuncStr += "\r\n"
+	return addFuncStr
+}
+
+func (t *Table2Struct) makeUpdateFuncStr() string {
+	tableName := t.camelCase(t.table)
+	updateFuncStr := "func " + "Update" + tableName + "(where map[string]interface{}) error {\r\n"
+	updateFuncStr += "}\r\n"
+	updateFuncStr += "\r\n"
+	return updateFuncStr
 }

@@ -8,7 +8,9 @@ import (
 	"gf/library/log"
 	"gf/process"
 	"gf/router"
+	"gf/tools"
 	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/os/gcmd"
 )
 
 func bootstrap() {
@@ -47,6 +49,25 @@ func RunProcess() {
 }
 
 func RunTools() {
+	toolArg := gcmd.GetArg(1, "tools")
+	opts := gcmd.GetOptAll()
+	// go run main.go tools -t tableName -d database
+	// -t: tableName
+	// -d: database if null is default
+	switch toolArg {
+	default:
+		database := "default"
+		table := ""
+		if _, ok := opts["d"]; ok {
+			database = opts["d"]
+		}
+		if _, ok := opts["t"]; !ok {
+			fmt.Println("-t is null,please input")
+			return
+		}
+		table = opts["t"]
+		tools.OrmGenTool(table, database)
+	}
 
 }
 
