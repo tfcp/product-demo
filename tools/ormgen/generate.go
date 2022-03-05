@@ -408,7 +408,7 @@ func (t *Table2Struct) makeDeleteFuncStr() string {
 
 func (t *Table2Struct) makeListFuncStr() string {
 	tableName := t.camelCase(t.table)
-	listFuncStr := "func " + "List" + tableName + "(where map[string]interface{}, page, size int) (*[]" + tableName + ",error){\r\n"
+	listFuncStr := "func " + "List" + tableName + "(where map[string]interface{}, page, size int) ([]*" + tableName + ",error){\r\n"
 	listFuncStr += "}\r\n"
 	listFuncStr += "\r\n"
 	return listFuncStr
