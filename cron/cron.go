@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	cronStdoutTitle    = []string{"任务名称", "表达式"}
+	cronStdoutTitle    = []string{"任务名称", "表达式", "负责人", "创建时间"}
 	cronStdoutContents = [][]string{}
 )
 
@@ -17,7 +17,7 @@ var (
 // */5 * * * * *	: 每分钟第2秒执行
 // 0 * * * * *		: 每分钟执行
 func Cron() {
-	// cron拆分
+	// cron任务
 	demoStdout := demo.CronDemo()
 
 	cronStdoutContents = append(cronStdoutContents, demoStdout...)

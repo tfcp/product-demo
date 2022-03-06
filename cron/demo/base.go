@@ -15,8 +15,8 @@ func CronDemo() [][]string {
 	var stdoutContents [][]string
 	stdoutContents = append(stdoutContents,
 		// cron demo
-		utils.AddCron("*/1 * * * * *", "HelloDemoCron1", HelloDemoCron),
-		utils.AddCron("*/2 * * * * *", "HelloDemoCron2", HelloDemoCron),
+		utils.AddCron("*/1 * * * * *", "HelloDemoCron1", "admin", HelloDemoCron),
+		utils.AddCron("*/2 * * * * *", "HelloDemoCron2", "admin", HelloDemoCron),
 	)
 	return stdoutContents
 }
