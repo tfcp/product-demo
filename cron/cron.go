@@ -2,6 +2,12 @@ package cron
 
 import (
 	"gf/cron/demo"
+	"gf/library/utils"
+)
+
+var (
+	cronStdoutTitle    = []string{"任务名称", "表达式"}
+	cronStdoutContents = [][]string{}
 )
 
 // (Seconds Minutes Hours Day Month Week)
@@ -12,5 +18,10 @@ import (
 // 0 * * * * *		: 每分钟执行
 func Cron() {
 	// cron拆分
-	demo.CronDemo()
+	demoStdout := demo.CronDemo()
+
+	cronStdoutContents = append(cronStdoutContents, demoStdout...)
+
+	// stdout cron list
+	utils.TableStdout(cronStdoutTitle, cronStdoutContents)
 }
