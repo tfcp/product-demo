@@ -6,6 +6,7 @@ import (
 	"gf/internal/middleware/jwt"
 	"gf/library/utils"
 	rice "github.com/GeertJohan/go.rice"
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,6 +16,8 @@ var (
 
 func RegisterRouter() {
 	Router = gin.Default()
+	// pprof
+	pprof.Register(Router)
 	Router.Use(cors.Cors())
 	fs := utils.EmbeddingFileSystem(rice.MustFindBox("../web/dist").HTTPBox())
 	Router.Use(utils.Serve("", fs))
@@ -30,4 +33,5 @@ func RegisterRouter() {
 	us := Router.Group("user")
 	us.GET("/login", demo.LoginApi)
 	us.GET("/info", demo.InfoApi)
+
 }

@@ -13,6 +13,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/esimonov/ifshort v1.0.4 // indirect
 	github.com/fzipp/gocyclo v0.4.0 // indirect
+	github.com/gin-contrib/pprof v1.3.0
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-critic/go-critic v0.6.2 // indirect
 	github.com/go-sql-driver/mysql v1.6.0
