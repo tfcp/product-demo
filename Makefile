@@ -36,3 +36,9 @@ build-linux:
 build-window:
     CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go
 
+.PHONY: build-rice
+build-rice:
+    go get github.com/GeertJohan/go.rice/rice
+    cd tools/rice
+	rice embed-go
+	mv tools/rice/

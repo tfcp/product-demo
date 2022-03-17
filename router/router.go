@@ -2,8 +2,10 @@ package router
 
 import (
 	"gf/api/demo"
+	"gf/internal/enum"
 	"gf/internal/middleware/cors"
 	"gf/internal/middleware/jwt"
+	//_ "gf/internal/rice"
 	"gf/library/utils"
 	rice "github.com/GeertJohan/go.rice"
 	"github.com/gin-contrib/pprof"
@@ -19,7 +21,7 @@ func RegisterRouter() {
 	// pprof
 	pprof.Register(Router)
 	Router.Use(cors.Cors())
-	fs := utils.EmbeddingFileSystem(rice.MustFindBox("../web/dist").HTTPBox())
+	fs := utils.EmbeddingFileSystem(rice.MustFindBox(enum.RicePath).HTTPBox())
 	Router.Use(utils.Serve("", fs))
 	dm := Router.Group("demo")
 	dm.Use(jwt.JWT())
