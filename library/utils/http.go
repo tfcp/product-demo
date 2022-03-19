@@ -10,7 +10,9 @@ import (
 )
 
 // http请求
-func RequestHttp(baseUrl string, query url.Values, postData, headers, cookies map[string]interface{}, method string) (map[string]interface{}, error) {
+func RequestHttp(baseUrl string, query url.Values,
+	postData, headers, cookies map[string]interface{},
+	method string) (map[string]interface{}, error) {
 	uri, err := url.Parse(baseUrl)
 	if err != nil {
 		return nil, err
@@ -32,11 +34,13 @@ func RequestHttp(baseUrl string, query url.Values, postData, headers, cookies ma
 	if err != nil {
 		return nil, err
 	}
+	// 添加header
 	if headers != nil {
 		for headerKey, headerValue := range headers {
 			req.Header.Add(headerKey, headerValue.(string))
 		}
 	}
+	// 添加cookie
 	if cookies != nil {
 		for cookieKey, cookieValue := range cookies {
 			cookie := &http.Cookie{Name: cookieKey, Value: cookieValue.(string)}
