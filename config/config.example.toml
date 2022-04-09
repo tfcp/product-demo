@@ -1,7 +1,5 @@
-logpath = "./log"
-
 [api]
- addr="0.0.0.0:80"
+ addr="0.0.0.0:8008"
 
 [redis]
     [redis.default]

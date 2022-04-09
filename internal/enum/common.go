@@ -1,5 +1,5 @@
 package enum
 
 var (
-	RicePath = "../web/dist"
+	RicePath = "./web/dist"
 )

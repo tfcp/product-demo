@@ -26,25 +26,33 @@ gf and gin project template...
     
     静态资源项目编译到二进制文件中(dist)
     (不用单独部署 小项目专用 大业务 微服务禁用该组件)
+
+6.gin-swagger
+    
+    api文档: https://www.jianshu.com/p/0563b1fc3ed9
+    go get -u github.com/swaggo/swag/cmd/swag
+    swag init
+    root中_"gf/docs"
     
 
 ## 项目结构
 
-    |--api          接口目录
-    |--cron         任务目录
-    |--process      进程目录
-    |--middleware   中间件目录
+    |--app         
+        |--api              任务目录
+        |--cron             任务目录
+        |--process          进程目录
     |--internal
-        |--enum     常量
-        |--model    模型
-        |--service  服务
+        |--middleware       常量
+        |--enum             中间件目录
+        |--model            模型
+        |--service          服务
     |--config
     |--bootstrap
     |--library
     |--logs
     |--router
     |--web
-    |--Makefile     快捷命令
+    |--Makefile             快捷命令
     |--main.go
 
 ## 常用命令

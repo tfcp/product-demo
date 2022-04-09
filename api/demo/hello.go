@@ -12,6 +12,10 @@ type RequestHelloInfo struct {
 	Name string `json:"name" form:"name" valid:"name      @required#name不能为空"`
 }
 
+// @Summary swagger文档示例1
+// @Param name query string true "name 名称" required
+// @Success 200 {object} utils.Res
+// @Router /demo/hello-info [get]
 func HelloInfoApi(c *gin.Context) {
 	var reqHelloInfo RequestHelloInfo
 	c.Bind(&reqHelloInfo)

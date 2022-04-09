@@ -2,12 +2,15 @@ package router
 
 import (
 	"gf/api/demo"
-	"gf/internal/enum"
 	"gf/internal/middleware/cors"
 	"gf/internal/middleware/jwt"
+	_ "gf/docs" // gin-swagger
+	ginSwagger "github.com/swaggo/gin-swagger"
+	swaggerFiles "github.com/swaggo/files"
+
 	//_ "gf/internal/rice"
-	"gf/library/utils"
-	rice "github.com/GeertJohan/go.rice"
+	//"gf/library/utils"
+	//rice "github.com/GeertJohan/go.rice"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 )
@@ -21,8 +24,9 @@ func RegisterRouter() {
 	// pprof
 	pprof.Register(Router)
 	Router.Use(cors.Cors())
-	fs := utils.EmbeddingFileSystem(rice.MustFindBox(enum.RicePath).HTTPBox())
-	Router.Use(utils.Serve("", fs))
+	//fs := utils.EmbeddingFileSystem(rice.MustFindBox(enum.RicePath).HTTPBox())
+	//Router.Use(utils.Serve("", fs))
+	Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	dm := Router.Group("demo")
 	dm.Use(jwt.JWT())
 	dm.GET("/hello-list", demo.HelloListApi)

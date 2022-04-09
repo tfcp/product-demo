@@ -1,0 +1,27 @@
+definitions:
+  utils.Res:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /demo/hello-info:
+    get:
+      parameters:
+      - description: name 名称
+        in: query
+        name: name
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.Res'
+      summary: swagger示例
+swagger: "2.0"
