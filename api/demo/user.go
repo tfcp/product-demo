@@ -16,9 +16,13 @@ type RequestUserList struct {
 }
 
 // @Summary swagger文档示例2
-// @Param name query string true "name 名称" required
+// @Tags 示例
+// @Param name query string true "name " required
+// @Param sex query string true "sex " required
+// @Param page query string true "page " required
+// @Param page_size query string true "page_size " required
 // @Success 200 {object} utils.Res
-// @Router /demo/hello-info [get]
+// @Router /demo/user-list [get]
 func UserListApi(c *gin.Context) {
 	var reqUserList RequestUserList
 	c.Bind(&reqUserList)

@@ -18,12 +18,61 @@ const docTemplate = `{
     "paths": {
         "/demo/hello-info": {
             "get": {
-                "summary": "swagger示例",
+                "tags": [
+                    "示例"
+                ],
+                "summary": "swagger文档示例1",
                 "parameters": [
                     {
                         "type": "string",
                         "description": "name 名称",
                         "name": "name",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Res"
+                        }
+                    }
+                }
+            }
+        },
+        "/demo/user-list": {
+            "get": {
+                "tags": [
+                    "示例"
+                ],
+                "summary": "swagger文档示例2",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name ",
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "sex ",
+                        "name": "sex",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page ",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page_size ",
+                        "name": "page_size",
                         "in": "query",
                         "required": true
                     }

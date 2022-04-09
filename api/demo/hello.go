@@ -13,6 +13,7 @@ type RequestHelloInfo struct {
 }
 
 // @Summary swagger文档示例1
+// @Tags 示例
 // @Param name query string true "name 名称" required
 // @Success 200 {object} utils.Res
 // @Router /demo/hello-info [get]
