@@ -1,12 +1,12 @@
 package router
 
 import (
-	"gf/api/demo"
+	"gf/app/api/demo"
+	_ "gf/docs" // gin-swagger
 	"gf/internal/middleware/cors"
 	"gf/internal/middleware/jwt"
-	_ "gf/docs" // gin-swagger
-	ginSwagger "github.com/swaggo/gin-swagger"
 	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
 	//_ "gf/internal/rice"
 	//"gf/library/utils"

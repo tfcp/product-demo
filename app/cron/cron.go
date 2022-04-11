@@ -1,7 +1,7 @@
 package cron
 
 import (
-	"gf/cron/demo"
+	"gf/app/cron/demo"
 	"gf/library/utils"
 )
 

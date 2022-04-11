@@ -2,11 +2,11 @@ package bootstrap
 
 import (
 	"fmt"
-	"gf/cron"
+	"gf/app/cron"
+	"gf/app/process"
 	"gf/internal/model"
 	"gf/library/gredis"
 	"gf/library/log"
-	"gf/process"
 	"gf/router"
 	"gf/tools"
 	"github.com/gogf/gf/frame/g"
