@@ -32,7 +32,7 @@ gf and gin project template...
     api文档: https://www.jianshu.com/p/0563b1fc3ed9
     go get -u github.com/swaggo/swag/cmd/swag
     swag init
-    root中_"gf/docs"
+    rooter中引入_"gf/docs"
     
 
 ## 项目结构
@@ -46,6 +46,7 @@ gf and gin project template...
         |--enum             中间件目录
         |--model            模型
         |--service          服务
+        |--client           外部请求(微服务)
     |--config
     |--bootstrap
     |--library
