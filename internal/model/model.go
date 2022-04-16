@@ -11,6 +11,7 @@ import (
 
 var (
 	Db *gorm.DB
+	DbTest *gorm.DB
 )
 
 type Model struct {
@@ -47,6 +48,10 @@ func Setup() error {
 	if err != nil {
 		return errors.New(fmt.Sprintf("models.Setup err: %v", err))
 	}
+	DbTest, err = setDb(DbTest, "test")
+	if err != nil {
+		return errors.New(fmt.Sprintf("models.TestSetup err: %v", err))
+	}
 	return nil
 }
 
@@ -61,10 +66,11 @@ func setDb(db *gorm.DB, dbName string) (*gorm.DB, error) {
 		return nil, err
 	}
 	db.LogMode(g.Config().GetBool("database." + dbName + ".log"))
-	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
-		//return g.Config().GetString("database."+dbName+".prefix") + defaultTableName
-		return g.Config().GetString("database.prefix") + defaultTableName
-	}
+	// 多数据库不能用这个属性
+	//gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
+	//	//return g.Config().GetString("database."+dbName+".prefix") + defaultTableName
+	//	return g.Config().GetString("database.prefix") + defaultTableName
+	//}
 
 	db.SingularTable(true)
 	db.DB().SetMaxIdleConns(10)

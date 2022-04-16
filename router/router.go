@@ -4,7 +4,6 @@ import (
 	"gf/app/api/demo"
 	_ "gf/docs" // gin-swagger
 	"gf/internal/middleware/cors"
-	"gf/internal/middleware/jwt"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
@@ -28,7 +27,7 @@ func RegisterRouter() {
 	//Router.Use(utils.Serve("", fs))
 	Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	dm := Router.Group("demo")
-	dm.Use(jwt.JWT())
+	//dm.Use(jwt.JWT())
 	dm.GET("/hello-list", demo.HelloListApi)
 	dm.GET("/hello-info", demo.HelloInfoApi)
 	dm.GET("/user-list", demo.UserListApi)

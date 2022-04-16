@@ -34,6 +34,9 @@ gf and gin project template...
     swag init
     rooter中引入_"gf/docs"
     
+7. kafka
+
+8. grpc
 
 ## 项目结构
 

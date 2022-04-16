@@ -1,7 +1,9 @@
 package demo
 
 import (
+	"fmt"
 	"gf/internal/model"
+	"github.com/gogf/gf/frame/g"
 	"github.com/jinzhu/gorm"
 )
 
@@ -17,6 +19,12 @@ type User struct {
 	Pwd          string `json:"pwd"`
 	Avatar       string `json:"avatar"`
 	Introduction string `json:"introduction"`
+}
+
+func (this *User) TableName() string{
+	// 静态表名 动态表名走db.Table
+	tableName := "user"
+	return fmt.Sprintf("%s%s",g.Config().GetString("database.demo.prefix"),tableName)
 }
 
 func (this *User) ListUser(where map[string]interface{}, page, size int) ([]*User, error) {
