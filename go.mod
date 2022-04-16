@@ -5,6 +5,7 @@ go 1.14
 require (
 	github.com/BurntSushi/toml v1.0.0 // indirect
 	github.com/GeertJohan/go.rice v1.0.2
+	github.com/Shopify/sarama v1.32.0
 	github.com/denisenkom/go-mssqldb v0.0.0-20190920000552-128d9f4ae1cd // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 // indirect
@@ -19,7 +20,6 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gomodule/redigo v2.0.1-0.20180401191855-9352ab68be13+incompatible
-	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/imdario/mergo v0.3.8 // indirect
 	github.com/jinzhu/gorm v0.0.0-20180213101209-6e1387b44c64
 	github.com/jinzhu/inflection v0.0.0-20170102125226-1c35d901db3d // indirect
@@ -36,7 +36,6 @@ require (
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.8.1
-	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce // indirect
 	golang.org/x/net v0.0.0-20220407224826-aac1ed45d8e3 // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
 	golang.org/x/sys v0.0.0-20220408201424-a24fb2fb8a0f // indirect
