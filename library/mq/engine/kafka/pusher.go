@@ -15,8 +15,6 @@ var (
 )
 
 type PusherKafka struct {
-	addr   []string // kafka addr
-	topic  string
 	client sarama.SyncProducer
 }
 
@@ -29,7 +27,7 @@ func (pusher *PusherKafka) Push(data []byte, topic string, blockKey ...string) e
 		err             error
 		defaultBlockKey = ""
 	)
-	producer := pusher.getProducerClient(g.Config().GetStrings("kafka.addr"))
+	producer := pusher.getProducerClient(g.Config().GetStrings("mq.kafka.addr"))
 	defer producer.Close()
 	if len(blockKey) > 0 {
 		defaultBlockKey = blockKey[0]
@@ -53,7 +51,7 @@ ForLoop:
 		case <-tick.C:
 			err = producer.SendMessages([]*sarama.ProducerMessage{msg})
 			if err == nil {
-				log.Logger.Debug("send message success")
+				log.Logger.Info("send message success")
 
 				break ForLoop
 			}
@@ -81,6 +79,5 @@ func (pusher *PusherKafka) getProducerClient(addrs []string) sarama.SyncProducer
 		}
 		pusher.client = producer
 	})
-
 	return pusher.client
 }
