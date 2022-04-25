@@ -52,6 +52,7 @@ gf and gin project template...
         |--client           外部请求(微服务)
     |--config
     |--bootstrap
+    |--docs                 接口文档
     |--library
     |--logs
     |--router
