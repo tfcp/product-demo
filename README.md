@@ -50,6 +50,7 @@ gf and gin project template...
         |--model            模型
         |--service          服务
         |--client           外部请求(微服务)
+    |--cmd                  cli工具
     |--config
     |--bootstrap
     |--docs                 接口文档
