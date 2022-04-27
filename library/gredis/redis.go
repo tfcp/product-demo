@@ -2,7 +2,7 @@ package gredis
 
 import (
 	"encoding/json"
-	"gf/library/log"
+	"tfpro/library/log"
 	"github.com/gogf/gf/container/gvar"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/util/gconv"

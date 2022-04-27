@@ -1,7 +1,7 @@
 package kafka
 
 import (
-	"gf/library/log"
+	"tfpro/library/log"
 	"github.com/Shopify/sarama"
 )
 

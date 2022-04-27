@@ -1,9 +1,9 @@
 package demo
 
 import (
-	"gf/internal/model/demo"
-	"gf/library/log"
-	"gf/library/utils"
+	"tfpro/internal/model/demo"
+	"tfpro/library/log"
+	"tfpro/library/utils"
 )
 
 type UserService struct {

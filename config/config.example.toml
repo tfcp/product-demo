@@ -25,6 +25,16 @@
         name        = "demo"
         type        = "mysql"
         tabel       = "hello"
+    [database.test]
+        host        = "127.0.0.1"
+        port        = "3306"
+        prefix      = ""
+        user        = "root"
+        pass        = "root"
+        name        = "demo"
+        type        = "mysql"
+        tabel       = "hello"
+
 [mq]
     [mq.kafka]
         addr = ["127.0.0.1:9092"]

@@ -1,7 +1,7 @@
 package kube
 
 import (
-	"gf/library/log"
+	"tfpro/library/log"
 	"github.com/gogf/gf/frame/g"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"

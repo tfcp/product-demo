@@ -1,9 +1,9 @@
 package test
 
 import (
-	"gf/internal/model"
-	"gf/library/gredis"
-	"gf/library/log"
+	"tfpro/internal/model"
+	"tfpro/library/gredis"
+	"tfpro/library/log"
 	"github.com/gogf/gf/frame/g"
 )
 

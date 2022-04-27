@@ -32,7 +32,7 @@ gf and gin project template...
     api文档: https://www.jianshu.com/p/0563b1fc3ed9
     go get -u github.com/swaggo/swag/cmd/swag
     swag init
-    rooter中引入_"gf/docs"
+    rooter中引入_"tfpro/docs"
     
 7. kafka
 

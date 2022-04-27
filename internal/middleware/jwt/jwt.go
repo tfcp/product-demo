@@ -1,8 +1,8 @@
 package jwt
 
 import (
-	code2 "gf/library/code"
-	"gf/library/utils"
+	code2 "tfpro/library/code"
+	"tfpro/library/utils"
 	"net/http"
 
 	"github.com/dgrijalva/jwt-go"

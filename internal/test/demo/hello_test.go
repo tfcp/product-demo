@@ -1,8 +1,8 @@
 package demo
 
 import (
-	"gf/internal/service/demo"
-	"gf/internal/test"
+	"tfpro/internal/service/demo"
+	"tfpro/internal/test"
 	"github.com/gogf/gf/test/gtest"
 	"testing"
 )

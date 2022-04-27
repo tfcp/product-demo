@@ -1,8 +1,8 @@
 package demo
 
 import (
-	"gf/internal/model/demo"
-	"gf/library/log"
+	"tfpro/internal/model/demo"
+	"tfpro/library/log"
 )
 
 type HelloService struct {

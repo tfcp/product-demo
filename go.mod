@@ -1,4 +1,4 @@
-module gf
+module tfpro
 
 go 1.14
 

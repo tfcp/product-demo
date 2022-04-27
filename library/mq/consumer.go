@@ -1,6 +1,6 @@
 package mq
 
-import "gf/library/mq/engine/kafka"
+import "tfpro/library/mq/engine/kafka"
 
 type Consumer interface {
 	// @param queueName 监听的队列名

@@ -1,14 +1,14 @@
 package router
 
 import (
-	"gf/app/api/demo"
-	_ "gf/docs" // gin-swagger
-	"gf/internal/middleware/cors"
+	"tfpro/app/api/demo"
+	_ "tfpro/docs" // gin-swagger
+	"tfpro/internal/middleware/cors"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
-	//_ "gf/internal/rice"
-	//"gf/library/utils"
+	//_ "tfpro/internal/rice"
+	//"tfpro/library/utils"
 	//rice "github.com/GeertJohan/go.rice"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"

@@ -2,15 +2,15 @@ package bootstrap
 
 import (
 	"fmt"
-	"gf/app/cron"
-	"gf/app/process"
-	"gf/internal/model"
-	"gf/library/gredis"
-	"gf/library/log"
-	"gf/router"
-	"gf/tools"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcmd"
+	"tfpro/app/cron"
+	"tfpro/app/process"
+	"tfpro/internal/model"
+	"tfpro/library/gredis"
+	"tfpro/library/log"
+	"tfpro/router"
+	"tfpro/tools"
 )
 
 func bootstrap() {

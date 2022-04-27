@@ -2,7 +2,7 @@ package demo
 
 import (
 	"fmt"
-	"gf/internal/model"
+	"tfpro/internal/model"
 	"github.com/gogf/gf/frame/g"
 	"github.com/jinzhu/gorm"
 )

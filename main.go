@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gf/bootstrap"
-	"gf/library/log"
+	"tfpro/bootstrap"
+	"tfpro/library/log"
 	"github.com/gogf/gf/os/gcmd"
 )
 

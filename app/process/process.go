@@ -1,6 +1,6 @@
 package process
 
-import "gf/app/process/demo"
+import "tfpro/app/process/demo"
 
 // consumer process
 func Process() {

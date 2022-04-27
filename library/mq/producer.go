@@ -1,6 +1,6 @@
 package mq
 
-import "gf/library/mq/engine/kafka"
+import "tfpro/library/mq/engine/kafka"
 
 type Producer interface {
 	// producer

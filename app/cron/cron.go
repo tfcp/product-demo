@@ -1,8 +1,8 @@
 package cron
 
 import (
-	"gf/app/cron/demo"
-	"gf/library/utils"
+	"tfpro/app/cron/demo"
+	"tfpro/library/utils"
 )
 
 var (

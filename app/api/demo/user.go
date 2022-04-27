@@ -1,9 +1,9 @@
 package demo
 
 import (
-	"gf/internal/service/demo"
-	"gf/library/code"
-	"gf/library/utils"
+	"tfpro/internal/service/demo"
+	"tfpro/library/code"
+	"tfpro/library/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/gogf/gf/util/gvalid"
 )
