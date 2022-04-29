@@ -25,6 +25,15 @@ func (this *UserService) List(where map[string]interface{}, page, size int) ([]*
 	return list, nil
 }
 
+func (this *UserService) Count(where map[string]interface{}) (int, error) {
+	count, err := this.userModel.CountUser(where)
+	if err != nil {
+		log.Logger.Errorf("UserService CountError: %v", err)
+		return 0, err
+	}
+	return count, nil
+}
+
 func (this *UserService) One(where map[string]interface{}) (*demo.User, error) {
 	one, err := this.userModel.OneUser(where)
 	if err != nil {

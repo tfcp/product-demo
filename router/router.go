@@ -1,11 +1,11 @@
 package router
 
 import (
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"tfpro/app/api/demo"
 	_ "tfpro/docs" // gin-swagger
 	"tfpro/internal/middleware/cors"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 
 	//_ "tfpro/internal/rice"
 	//"tfpro/library/utils"
@@ -31,12 +31,12 @@ func RegisterRouter() {
 	dm.GET("/hello-list", demo.HelloListApi)
 	dm.GET("/hello-info", demo.HelloInfoApi)
 	dm.GET("/user-list", demo.UserListApi)
+	dm.GET("/user-count", demo.UserCountApi)
 	dm.GET("/user-detail", demo.UserDetailApi)
 	dm.POST("/user-delete", demo.UserDeleteApi)
 	dm.POST("/user-change", demo.UserChangeStatusApi)
 	dm.POST("/user-save", demo.UserSaveApi)
 	us := Router.Group("user")
-	us.GET("/login", demo.LoginApi)
+	us.Any("/login", demo.LoginApi)
 	us.GET("/info", demo.InfoApi)
-
 }

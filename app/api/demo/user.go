@@ -1,11 +1,11 @@
 package demo
 
 import (
+	"github.com/gin-gonic/gin"
+	"github.com/gogf/gf/util/gvalid"
 	"tfpro/internal/service/demo"
 	"tfpro/library/code"
 	"tfpro/library/utils"
-	"github.com/gin-gonic/gin"
-	"github.com/gogf/gf/util/gvalid"
 )
 
 type RequestUserList struct {
@@ -39,6 +39,37 @@ func UserListApi(c *gin.Context) {
 		whereCondition["sex"] = reqUserList.Sex
 	}
 	ListInfo, err := hs.List(whereCondition, reqUserList.Page, reqUserList.PageSize)
+	if err != nil {
+		utils.Response(c, code.ErrSystem, err.Error())
+		return
+	}
+	res := map[string]interface{}{
+		"result": ListInfo,
+	}
+	utils.Response(c, code.ErrSuccess, res)
+}
+
+type RequestUserCount struct {
+	Name string `json:"name" form:"name"`
+	Sex  int    `json:"sex" form:"sex"`
+}
+
+func UserCountApi(c *gin.Context) {
+	var reqUserCount RequestUserCount
+	c.Bind(&reqUserCount)
+	if err := gvalid.CheckStruct(c, reqUserCount, nil); err != nil {
+		utils.Response(c, code.ErrSystem, err.FirstString())
+		return
+	}
+	hs := demo.NewUserService()
+	whereCondition := map[string]interface{}{}
+	if reqUserCount.Name != "" {
+		whereCondition["name"] = reqUserCount.Name
+	}
+	if reqUserCount.Sex != 0 {
+		whereCondition["sex"] = reqUserCount.Sex
+	}
+	ListInfo, err := hs.Count(whereCondition)
 	if err != nil {
 		utils.Response(c, code.ErrSystem, err.Error())
 		return
