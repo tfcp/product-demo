@@ -9,7 +9,7 @@
           <el-select v-model="form.sex" placeholder="请选择性别" @change="getChange">
             <el-option
               v-for="item in sexList"
-              :key="item.value"
+              :key="item.label"
               :label="item.label"
               :value="item.value">
             </el-option>
@@ -49,23 +49,23 @@
 </template>
 
 <script>
-
-  import { getDetail, enable, disable , save} from '@/api/demo'
+import { getDetail, enable, disable , save} from '@/api/demo'
 
 export default {
   data() {
     return {
       sexList: [
-        {value:1,label:'男',text:"男"},
-        {value:2,label:'女',text:"女"},
+        { value: 1, label: '男' },
+        { value: 2, label: '女' }
       ],
       form: {
         id: 0,
         name: '',
-        age: "",
+        age: '',
         role: 1,
+        sex: 1,
         introduction: '',
-        status: "2"
+        status: '2'
       },
       rules: {
         name: [
@@ -75,15 +75,15 @@ export default {
         age: [
           { required: true, message: '请填写年龄', trigger: 'blur' },
           { type: 'number', message: '请填写数字', trigger: 'blur', transform: (value) => Number(value)},
-        ],
+        ]
       }
     }
   },
-  created () {
+  created() {
     if(this.$route.query.id != null) {
       getDetail(this.$route.query.id).then(response => {
-        let res = response.data.result
-        this.form.id   = res.id
+        const res = response.data.result
+        this.form.id = res.id
         this.form.name = res.name
         this.form.role = res.role
         this.form.introduction = res.introduction
@@ -93,21 +93,20 @@ export default {
     }
   },
   methods: {
-    getChange(){
-      this.form.sex = ""
+    getChange() {
     },
     onChange(item) {
-      if(item.id == 0){
+      if(item.id === 0) {
         return
       }
-      if(item.status){
+      if(item.status) {
         enable(item.id)
       } else {
         disable(item.id)
       }
     },
     onSubmit() {
-      this.$refs["userRule"].validate((valid) => {
+      this.$refs['userRule'].validate((valid) => {
         if (valid) {
           save(this.form).then(response => {
             this.$message({
@@ -120,18 +119,17 @@ export default {
           this.$message({
             message: '参数有误!',
             type: 'warning'
-          });
-          return false;
+          })
+          return false
         }
-      });
-
+      })
     },
     onClear() {
-      this.form.name = ""
+      this.form.name = ''
       this.form.role = 2
-      this.form.age = ""
-      this.form.introduction = ""
-      this.form.sex = ""
+      this.form.age = ''
+      this.form.introduction = ''
+      this.form.sex = ''
       this.form.status = 2
       this.$message({
         message: '清除成功!',

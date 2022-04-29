@@ -5,7 +5,7 @@ export function login(data) {
     url: '/user/login',
     method: 'post',
     data,
-    baseURL: "http://127.0.0.1:8008/"
+    baseURL: process.env.VUE_APP_URL
   })
 }
 
@@ -14,6 +14,6 @@ export function getInfo(token) {
     url: '/user/info',
     method: 'get',
     params: { token },
-    baseURL: "http://127.0.0.1:8008/"
+    baseURL: process.env.VUE_APP_URL
   })
 }

@@ -86,9 +86,7 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[10, 20, 50]"
-        :page-size="10"
+        :page-sizes="[1, 10, 50]"
         layout="total, sizes, prev, pager, next, jumper"
         :total="countData">
       </el-pagination>
@@ -97,74 +95,85 @@
 </template>
 
 <script>
-  import { getList,Delete } from '@/api/demo'
+import { getList, Delete, getCount } from '@/api/demo'
 
-  export default {
-    filters: {
-      statusFilter(status) {
-        var res = 'success'
-        if (status == "2"){
-          res = 'danger'
-        }
-        // deleted: 'gray'
-        return res
+export default {
+  filters: {
+    statusFilter(status) {
+      var res = 'success'
+      if (status == "2"){
+        res = 'danger'
       }
-    },
-    data() {
-      return {
-        searchParams: {
-          page_size: 20,
-          page: 1,
-          name: '',
-          sex: ""
+      // deleted: 'gray'
+      return res
+    }
+  },
+  data() {
+    return {
+      searchParams: {
+        page_size: 20,
+        page: 1,
+        name: '',
+        sex: ''
+      },
+      sexList: [
+        {
+          value: '1',
+          label: '男'
         },
-        sexList: [
-          {
-            value: '1',
-            label: '男'
-          },
-          {
-            value: '2',
-            label: '女'
-          }
-        ],
-        list: null,
-        countData: 0,
-        listLoading: true
-      }
+        {
+          value: '2',
+          label: '女'
+        }
+      ],
+      list: null,
+      countData: 0,
+      listLoading: true
+    }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      this.listLoading = true
+      getList(this.searchParams).then(response => {
+        this.list = response.data.result
+        this.listLoading = false
+      })
+      getCount(this.searchParams).then(response => {
+        this.countData = response.data.result
+      })
     },
-    created() {
+    handleSizeChange(val) {
+      this.searchParams.page_size = val
       this.fetchData()
     },
-    methods: {
-      fetchData() {
-        this.listLoading = true
-        getList(this.searchParams).then(response => {
-          this.list = response.data.result
-          this.listLoading = false
+    handleCurrentChange(val) {
+      this.searchParams.page = val
+      this.fetchData()
+    },
+    remove(id) {
+      this.$appConfirm(() => {
+        Delete(id).then(response => {
+          this.refresh()
         })
-      },
-      remove (id) {
-        this.$appConfirm(() => {
-          Delete(id).then( response => {
-            this.refresh()
-          })
-        })
-      },
-      refresh () {
-        this.fetchData(() => {
-          this.$message.success('刷新成功')
-        })
-      },
-      toEdit (id) {
-        let path = ''
-        if (id === 0) {
-          path = '/user/add'
-        } else {
-          path = '/user/add?id='+id
-        }
-        this.$router.push(path)
+      })
+    },
+    refresh() {
+      this.fetchData(() => {
+        this.$message.success('刷新成功')
+      })
+    },
+    toEdit(id) {
+      let path = ''
+      if (id === 0) {
+        path = '/user/add'
+      } else {
+        path = '/user/add?id=' + id
       }
+      this.$router.push(path)
     }
   }
+}
 </script>

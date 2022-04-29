@@ -5,28 +5,37 @@ export function getList(params) {
     url: '/demo/user-list',
     method: 'get',
     params,
-    baseURL: "http://127.0.0.1:8008/"
+    baseURL: process.env.VUE_APP_URL
+  })
+}
+
+export function getCount(params) {
+  return request({
+    url: '/demo/user-count',
+    method: 'get',
+    params,
+    baseURL: process.env.VUE_APP_URL
   })
 }
 
 export function getDetail(id) {
   return request({
-    url: '/demo/user-detail?id='+id,
+    url: '/demo/user-detail?id=' + id,
     method: 'get',
-    baseURL: "http://127.0.0.1:8008/"
+    baseURL: process.env.VUE_APP_URL
   })
 }
 
 export function Delete(id) {
   return request({
-    url: '/demo/user-delete?id='+id,
+    url: '/demo/user-delete?id=' + id,
     method: 'post',
-    baseURL: "http://127.0.0.1:8008/"
+    baseURL: process.env.VUE_APP_URL
   })
 }
 
 export function enable(id) {
-  let params = {
+  const params = {
     id: id,
     status: 1
   }
@@ -34,12 +43,12 @@ export function enable(id) {
     url: '/demo/user-change',
     method: 'post',
     params,
-    baseURL: "http://127.0.0.1:8008/"
+    baseURL: process.env.VUE_APP_URL
   })
 }
 
 export function disable(id) {
-  let params = {
+  const params = {
     id: id,
     status: 2
   }
@@ -47,7 +56,7 @@ export function disable(id) {
     url: '/demo/user-change',
     method: 'post',
     params,
-    baseURL: "http://127.0.0.1:8008/"
+    baseURL: process.env.VUE_APP_URL
   })
 }
 
@@ -56,6 +65,6 @@ export function save(params) {
     url: '/demo/user-save',
     method: 'post',
     params,
-    baseURL: "http://127.0.0.1:8008/"
+    baseURL: process.env.VUE_APP_URL
   })
 }
