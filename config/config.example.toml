@@ -1,5 +1,5 @@
-[api]
- addr="0.0.0.0:8008"
+[server]
+ addr="0.0.0.0:8000"
 
 [redis]
     [redis.default]
@@ -25,6 +25,7 @@
         name        = "demo"
         type        = "mysql"
         tabel       = "hello"
+        log         = "true"
     [database.test]
         host        = "127.0.0.1"
         port        = "3306"
@@ -34,7 +35,7 @@
         name        = "demo"
         type        = "mysql"
         tabel       = "hello"
-
+        log         = "true"
 [mq]
     [mq.kafka]
-        addr = ["127.0.0.1:9092"]
+        addr = ["116.62.79.79:9092"]
