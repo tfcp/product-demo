@@ -40,7 +40,7 @@ func bootstrap() {
 func Run() {
 	bootstrap()
 	log.Logger.Println("gRpc server start success.")
-	address := g.Config().GetString("server.addr")
+	address := g.Config().GetString("api.addr")
 	if err := gRPCServer.Run(address); err != nil {
 		log.Logger.Fatal(err)
 	}
