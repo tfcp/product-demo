@@ -9,8 +9,6 @@ import (
 func main() {
 	if err := gcmd.BindHandleMap(map[string]func(){
 		"server":  bootstrap.Run,
-		"process": bootstrap.RunProcess,
-		"cron":    bootstrap.RunCron,
 		"help":    bootstrap.RunHelp,
 		"tools":   bootstrap.RunTools,
 	}); err != nil {

@@ -2,9 +2,9 @@ package demo
 
 import (
 	"fmt"
-	"tfpro/internal/model"
 	"github.com/gogf/gf/frame/g"
 	"github.com/jinzhu/gorm"
+	"tfpro/internal/model"
 )
 
 // gorm文档: https://www.tizi365.com/archives/22.html
@@ -21,10 +21,10 @@ type User struct {
 	Introduction string `json:"introduction"`
 }
 
-func (this *User) TableName() string{
+func (this *User) TableName() string {
 	// 静态表名 动态表名走db.Table
 	tableName := "user"
-	return fmt.Sprintf("%s%s",g.Config().GetString("database.demo.prefix"),tableName)
+	return fmt.Sprintf("%s%s", g.Config().GetString("database.v1.prefix"), tableName)
 }
 
 func (this *User) ListUser(where map[string]interface{}, page, size int) ([]*User, error) {

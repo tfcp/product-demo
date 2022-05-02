@@ -11,6 +11,7 @@ import (
 
 var (
 	jwtSecret []byte
+	// jwt time expire
 	jwtExpire time.Duration = 3 * time.Hour
 )
 

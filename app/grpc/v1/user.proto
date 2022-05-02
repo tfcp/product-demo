@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "app/grpc/v1";
+
+package v1;
+
+service User {
+  rpc Info(InfoReq) returns (InfoRes){}
+  rpc List(ListReq) returns (ListRes){}
+
+}
+
+message InfoReq {
+  string user_id = 1;
+}
+
+message InfoRes {
+  string name = 1;
+  uint32 age = 2;
+}
+
+message ListReq {
+  string user_id = 1;
+}
+
+message ListRes {
+  repeated InfoRes list = 1;
+}

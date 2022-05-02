@@ -4,13 +4,18 @@ import (
 	"fmt"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcmd"
-	"tfpro/app/cron"
-	"tfpro/app/process"
+	v1 "tfpro/app/grpc/v1"
 	"tfpro/internal/model"
+	"tfpro/internal/service/demo"
 	"tfpro/library/gredis"
+	"tfpro/library/grpc"
 	"tfpro/library/log"
-	"tfpro/router"
 	"tfpro/tools"
+)
+
+var (
+	// 应用服务引擎，单项目单服务使用唯一Server对象
+	gRPCServer = grpc.Default()
 )
 
 func bootstrap() {
@@ -22,30 +27,23 @@ func bootstrap() {
 		log.Logger.Fatalf("db init error:%v", err)
 		return
 	}
+	// 应用配置初始化
+	if err := gRPCServer.InitServer(); err != nil {
+		log.Logger.Fatal(err)
+	}
+	// 注册grpc server
+	v1.RegisterUserServer(gRPCServer.Server, new(demo.RpcServer))
+
 }
 
-// web project
+// rpc project
 func Run() {
 	bootstrap()
-	router.RegisterRouter()
-	addr := g.Config().GetString("api.addr")
-	if err := router.Router.Run(addr); err != nil {
-		log.Logger.Fatalf("router init error:%v", err)
+	log.Logger.Println("gRpc server start success.")
+	address := g.Config().GetString("server.addr")
+	if err := gRPCServer.Run(address); err != nil {
+		log.Logger.Fatal(err)
 	}
-}
-
-// cronjob
-func RunCron() {
-	bootstrap()
-	cron.Cron()
-	select {}
-}
-
-// consumer
-func RunProcess() {
-	bootstrap()
-	process.Process()
-	select {}
 }
 
 func RunTools() {

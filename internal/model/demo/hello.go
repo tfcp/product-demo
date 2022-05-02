@@ -2,11 +2,10 @@ package demo
 
 import (
 	"fmt"
-	"tfpro/internal/model"
 	"github.com/gogf/gf/frame/g"
 	"github.com/jinzhu/gorm"
+	"tfpro/internal/model"
 )
-
 
 type Hello struct {
 	*model.Model
@@ -14,9 +13,9 @@ type Hello struct {
 	Age  int    `json:"age"`
 }
 
-func (this *Hello) TableName(db *gorm.DB) string{
+func (this *Hello) TableName(db *gorm.DB) string {
 	tableName := "hello"
-	return fmt.Sprintf("%s%s",g.Config().GetString("database.demo.prefix"),tableName)
+	return fmt.Sprintf("%s%s", g.Config().GetString("database.v1.prefix"), tableName)
 }
 
 func (this *Hello) ListHello(where map[string]interface{}) ([]*Hello, error) {
