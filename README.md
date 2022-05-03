@@ -4,32 +4,34 @@ grpc project template...
 
 ## 项目介绍
     
-1.golangci-lint
+    1.golangci-lint
+        
+        golang代码规范检查组件
+        文档: https://golangci-lint.run/usage/install/
+        
+    2. kafka
     
-    golang代码规范检查组件
-    文档: https://golangci-lint.run/usage/install/
+    3. grpc
     
-2. kafka
-
-3. grpc
-    rpc协议(需要注意协议版本v2,v3不同)
-    1. 安装
-    参考文档:(https://zhuanlan.zhihu.com/p/501542023)
-    2. 使用(Makefile)
-    make go
+        rpc协议(需要注意协议版本v2,v3不同)
+        1. 安装
+        参考文档:(https://zhuanlan.zhihu.com/p/501542023)
+        2. 使用(Makefile)
+        make go
+        
+    4. grpcui
     
-4. grpcui
-   基于反射的grpc调试工具
-   安装:
-    go get github.com/fullstorydev/grpcui
-    go install github.com/fullstorydev/grpcui/cmd/grpcui
-   mac:
-    sudo cp `go env|grep 'GOPATH'|sed -e 's/GOPATH="//' -e 's/"//'`/bin/grpcui /usr/local/bin/
-    chmod +x /usr/local/bin/grpcui 
-    
-   调试使用(仅限本地):
-    1. make server # 设置本地调试模式
-    2. grpcui -plaintext 127.0.0.1:8000
+       基于反射的grpc调试工具
+       安装:
+        go get github.com/fullstorydev/grpcui
+        go install github.com/fullstorydev/grpcui/cmd/grpcui
+       mac:
+        sudo cp `go env|grep 'GOPATH'|sed -e 's/GOPATH="//' -e 's/"//'`/bin/grpcui /usr/local/bin/
+        chmod +x /usr/local/bin/grpcui 
+        
+       调试使用(仅限本地):
+        1. make server # 设置本地调试模式
+        2. grpcui -plaintext 127.0.0.1:8000
     
 ## 项目结构
 
@@ -51,11 +53,11 @@ grpc project template...
     |--main.go
 
 ## 常用命令
-1. make go
-加载新协议
+    1. make go
+        加载新协议
 
-2. make clean
-清理所有协议文件
+    2. make clean
+        清理所有协议文件
 
-3. make server
-本地程序调试
+    3. make server
+        本地程序调试
