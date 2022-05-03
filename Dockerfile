@@ -1,6 +1,6 @@
 FROM registry-vpc.cn-hangzhou.aliyuncs.com/medlinker/alpine:3.8
 
-LABEL maintainer="zhaosuji@medlinker.com"
+LABEL maintainer="sujizhao@test.com"
 
 #######################################################
 # 同时适用于单仓库应用和大仓库应用
