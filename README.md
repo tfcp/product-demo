@@ -10,26 +10,35 @@ grpc project template...
         文档: https://golangci-lint.run/usage/install/
         
     2. kafka
+        
+        基于sarama
+        
+    3. redis
     
-    3. grpc
+        基于redigo
+        
+    4. mysql
+        
+        基于gorm
+        
+    5. grpc
     
         rpc协议(需要注意协议版本v2,v3不同)
         1. 安装
-        参考文档:(https://zhuanlan.zhihu.com/p/501542023)
+            参考文档:(https://zhuanlan.zhihu.com/p/501542023)
         2. 使用(Makefile)
-        make go
+            make go
         
-    4. grpcui
+    6. grpcui
     
        基于反射的grpc调试工具
-       安装:
-        go get github.com/fullstorydev/grpcui
-        go install github.com/fullstorydev/grpcui/cmd/grpcui
-       mac:
-        sudo cp `go env|grep 'GOPATH'|sed -e 's/GOPATH="//' -e 's/"//'`/bin/grpcui /usr/local/bin/
-        chmod +x /usr/local/bin/grpcui 
-        
-       调试使用(仅限本地):
+       6.1 安装:
+          go get github.com/fullstorydev/grpcui
+          go install github.com/fullstorydev/grpcui/cmd/grpcui
+       6.2 mac:
+          sudo cp `go env|grep 'GOPATH'|sed -e 's/GOPATH="//' -e 's/"//'`/bin/grpcui /usr/local/bin/
+          chmod +x /usr/local/bin/grpcui 
+       6.3 调试使用(仅限本地):
         1. make server # 设置本地调试模式
         2. grpcui -plaintext 127.0.0.1:8000
     
