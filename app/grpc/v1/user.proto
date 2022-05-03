@@ -11,16 +11,17 @@ service User {
 }
 
 message InfoReq {
-  string user_id = 1;
+  uint32 user_id = 1;
 }
 
 message InfoRes {
   string name = 1;
   uint32 age = 2;
+  uint32 user_id = 3;
 }
 
 message ListReq {
-  string user_id = 1;
+  uint32 user_id = 1;
 }
 
 message ListRes {
