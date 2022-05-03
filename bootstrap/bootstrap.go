@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcmd"
+	"google.golang.org/grpc/reflection"
+	"os"
 	v1 "tfpro/app/grpc/v1"
 	"tfpro/internal/model"
 	"tfpro/internal/service/demo"
@@ -36,10 +38,19 @@ func bootstrap() {
 
 }
 
+func gRpcDebug() {
+	// 基于grpcui进行调试
+	reflection.Register(gRPCServer.Server)
+}
+
 // rpc project
 func Run() {
 	bootstrap()
 	log.Logger.Println("gRpc server start success.")
+	if os.Getenv("ENV") == "DEV" {
+		log.Logger.Println("gRpc debug mode open.")
+		gRpcDebug()
+	}
 	address := g.Config().GetString("api.addr")
 	if err := gRPCServer.Run(address); err != nil {
 		log.Logger.Fatal(err)
@@ -88,9 +99,7 @@ Usage:
 
 The commands are:
 
-	server             start http server.
-	cron               start the cron job.
-	process            start the process.
+	server             start grpc server.
 
 `
 	fmt.Println(helpInfo)

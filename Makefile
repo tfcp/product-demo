@@ -6,6 +6,9 @@ out  := ./
 
 .PHONY: go php js clean
 
+server:
+	@export ENV=DEV && go run main.go server
+
 go:
 	@$(foreach file, $(src), protoc $(file) -I $(root) --go_out=plugins=grpc:$(out);)
 
