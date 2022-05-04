@@ -44,6 +44,9 @@ grpc project template...
         1. make server # 设置本地调试模式
         2. grpcui -plaintext 127.0.0.1:8000
     
+    7. 文档
+        
+        可以直接依赖grpcui查看接口文档
 ## 项目结构
 
     |--app         
