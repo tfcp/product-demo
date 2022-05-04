@@ -11,6 +11,7 @@ func (this *RpcServer) Info(ctx context.Context, req *v1.InfoReq) (*v1.InfoRes, 
 		Age:    1,
 		UserId: req.UserId,
 	}
+	//client.TfRemoteClient.List(context.Background(),)
 	return &res, nil
 }
 

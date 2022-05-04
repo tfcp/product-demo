@@ -9,7 +9,6 @@ package v1;
 service Remote {
   rpc Info(InfoReq) returns (InfoRes){}
   rpc List(ListReq) returns (ListRes){}
-
 }
 
 message InfoReq {

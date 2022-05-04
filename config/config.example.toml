@@ -9,6 +9,10 @@
        maxIdle      = 20
        maxActive    = 20
        idleTimeout  = 200
+# 远程rpc地址
+[client]
+    tf_remote_addr = "127.0.0.1:8001"
+
 [log]
     path    =   "./logs"
     level   =   "all"
