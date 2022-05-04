@@ -26,7 +26,9 @@ grpc project template...
         rpc协议(需要注意协议版本v2,v3不同)
         1. 安装
             参考文档:(https://zhuanlan.zhihu.com/p/501542023)
-        2. 使用(Makefile)
+        2. grpc学习:
+            文档: (https://www.topgoer.com/%E5%BE%AE%E6%9C%8D%E5%8A%A1/gRPC)
+        3. 使用(Makefile)
             make go
         
     6. grpcui

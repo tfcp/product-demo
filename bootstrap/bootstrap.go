@@ -29,6 +29,9 @@ func bootstrap() {
 		log.Logger.Fatalf("db init error:%v", err)
 		return
 	}
+	// 中间件
+	//gRPCServer.Use()
+
 	// 应用配置初始化
 	if err := gRPCServer.InitServer(); err != nil {
 		log.Logger.Fatal(err)
