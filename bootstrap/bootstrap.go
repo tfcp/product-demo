@@ -9,6 +9,7 @@ import (
 	v1 "tfpro/app/grpc/v1"
 	"tfpro/internal/model"
 	"tfpro/internal/service/demo"
+	"tfpro/library/config"
 	"tfpro/library/gredis"
 	"tfpro/library/grpc"
 	"tfpro/library/log"
@@ -21,6 +22,8 @@ var (
 )
 
 func bootstrap() {
+	config.Setup()
+	return
 	log.Setup()
 	if err := gredis.Setup(); err != nil {
 		log.Logger.Fatalf("redis init error:%v", err)
