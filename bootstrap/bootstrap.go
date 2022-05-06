@@ -54,6 +54,10 @@ func Run() {
 		log.Logger.Println("gRpc debug mode open.")
 		gRpcDebug()
 	}
+	if os.Getenv("ENV") == "DEV" {
+		log.Logger.Println("gRpc debug mode open.")
+		gRpcDebug()
+	}
 	address := g.Config().GetString("api.addr")
 	if err := gRPCServer.Run(address); err != nil {
 		log.Logger.Fatal(err)

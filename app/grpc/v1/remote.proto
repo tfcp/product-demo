@@ -7,24 +7,24 @@ package v1;
 // 远端的rpc服务协议 (只是展示, 理论上尽量不允许微服务层之间依赖关系)
 
 service Remote {
-  rpc Info(InfoReq) returns (InfoRes){}
-  rpc List(ListReq) returns (ListRes){}
+  rpc RemoteInfo(RemoteInfoReq) returns (RemoteInfoRes){}
+  rpc RemoteList(RemoteListReq) returns (RemoteListRes){}
 }
 
-message InfoReq {
+message RemoteInfoReq {
   uint32 remote_id = 1;
 }
 
-message InfoRes {
+message RemoteInfoRes {
   string name = 1;
   uint32 age = 2;
   uint32 remote_id = 3;
 }
 
-message ListReq {
+message RemoteListReq {
   uint32 remote_id = 1;
 }
 
-message ListRes {
-  repeated InfoRes list = 1;
+message RemoteListRes {
+  repeated RemoteInfoRes list = 1;
 }

@@ -52,6 +52,10 @@ product and gin project template...
     7. 文档
         
         可以直接依赖grpcui查看接口文档
+        
+    8. 配置中心
+        
+        直接基于kratos的配置实现(太香了)
 ## 项目结构
 
     |--app         

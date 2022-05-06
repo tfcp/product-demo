@@ -24,7 +24,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type InfoReq struct {
+type RemoteInfoReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -32,8 +32,8 @@ type InfoReq struct {
 	RemoteId uint32 `protobuf:"varint,1,opt,name=remote_id,json=remoteId,proto3" json:"remote_id,omitempty"`
 }
 
-func (x *InfoReq) Reset() {
-	*x = InfoReq{}
+func (x *RemoteInfoReq) Reset() {
+	*x = RemoteInfoReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_v1_remote_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -41,13 +41,13 @@ func (x *InfoReq) Reset() {
 	}
 }
 
-func (x *InfoReq) String() string {
+func (x *RemoteInfoReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*InfoReq) ProtoMessage() {}
+func (*RemoteInfoReq) ProtoMessage() {}
 
-func (x *InfoReq) ProtoReflect() protoreflect.Message {
+func (x *RemoteInfoReq) ProtoReflect() protoreflect.Message {
 	mi := &file_v1_remote_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -59,19 +59,19 @@ func (x *InfoReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use InfoReq.ProtoReflect.Descriptor instead.
-func (*InfoReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use RemoteInfoReq.ProtoReflect.Descriptor instead.
+func (*RemoteInfoReq) Descriptor() ([]byte, []int) {
 	return file_v1_remote_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *InfoReq) GetRemoteId() uint32 {
+func (x *RemoteInfoReq) GetRemoteId() uint32 {
 	if x != nil {
 		return x.RemoteId
 	}
 	return 0
 }
 
-type InfoRes struct {
+type RemoteInfoRes struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -81,8 +81,8 @@ type InfoRes struct {
 	RemoteId uint32 `protobuf:"varint,3,opt,name=remote_id,json=remoteId,proto3" json:"remote_id,omitempty"`
 }
 
-func (x *InfoRes) Reset() {
-	*x = InfoRes{}
+func (x *RemoteInfoRes) Reset() {
+	*x = RemoteInfoRes{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_v1_remote_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -90,13 +90,13 @@ func (x *InfoRes) Reset() {
 	}
 }
 
-func (x *InfoRes) String() string {
+func (x *RemoteInfoRes) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*InfoRes) ProtoMessage() {}
+func (*RemoteInfoRes) ProtoMessage() {}
 
-func (x *InfoRes) ProtoReflect() protoreflect.Message {
+func (x *RemoteInfoRes) ProtoReflect() protoreflect.Message {
 	mi := &file_v1_remote_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -108,33 +108,33 @@ func (x *InfoRes) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use InfoRes.ProtoReflect.Descriptor instead.
-func (*InfoRes) Descriptor() ([]byte, []int) {
+// Deprecated: Use RemoteInfoRes.ProtoReflect.Descriptor instead.
+func (*RemoteInfoRes) Descriptor() ([]byte, []int) {
 	return file_v1_remote_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *InfoRes) GetName() string {
+func (x *RemoteInfoRes) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *InfoRes) GetAge() uint32 {
+func (x *RemoteInfoRes) GetAge() uint32 {
 	if x != nil {
 		return x.Age
 	}
 	return 0
 }
 
-func (x *InfoRes) GetRemoteId() uint32 {
+func (x *RemoteInfoRes) GetRemoteId() uint32 {
 	if x != nil {
 		return x.RemoteId
 	}
 	return 0
 }
 
-type ListReq struct {
+type RemoteListReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -142,8 +142,8 @@ type ListReq struct {
 	RemoteId uint32 `protobuf:"varint,1,opt,name=remote_id,json=remoteId,proto3" json:"remote_id,omitempty"`
 }
 
-func (x *ListReq) Reset() {
-	*x = ListReq{}
+func (x *RemoteListReq) Reset() {
+	*x = RemoteListReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_v1_remote_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -151,13 +151,13 @@ func (x *ListReq) Reset() {
 	}
 }
 
-func (x *ListReq) String() string {
+func (x *RemoteListReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListReq) ProtoMessage() {}
+func (*RemoteListReq) ProtoMessage() {}
 
-func (x *ListReq) ProtoReflect() protoreflect.Message {
+func (x *RemoteListReq) ProtoReflect() protoreflect.Message {
 	mi := &file_v1_remote_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -169,28 +169,28 @@ func (x *ListReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListReq.ProtoReflect.Descriptor instead.
-func (*ListReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use RemoteListReq.ProtoReflect.Descriptor instead.
+func (*RemoteListReq) Descriptor() ([]byte, []int) {
 	return file_v1_remote_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListReq) GetRemoteId() uint32 {
+func (x *RemoteListReq) GetRemoteId() uint32 {
 	if x != nil {
 		return x.RemoteId
 	}
 	return 0
 }
 
-type ListRes struct {
+type RemoteListRes struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	List []*InfoRes `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	List []*RemoteInfoRes `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 }
 
-func (x *ListRes) Reset() {
-	*x = ListRes{}
+func (x *RemoteListRes) Reset() {
+	*x = RemoteListRes{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_v1_remote_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -198,13 +198,13 @@ func (x *ListRes) Reset() {
 	}
 }
 
-func (x *ListRes) String() string {
+func (x *RemoteListRes) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListRes) ProtoMessage() {}
+func (*RemoteListRes) ProtoMessage() {}
 
-func (x *ListRes) ProtoReflect() protoreflect.Message {
+func (x *RemoteListRes) ProtoReflect() protoreflect.Message {
 	mi := &file_v1_remote_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -216,12 +216,12 @@ func (x *ListRes) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListRes.ProtoReflect.Descriptor instead.
-func (*ListRes) Descriptor() ([]byte, []int) {
+// Deprecated: Use RemoteListRes.ProtoReflect.Descriptor instead.
+func (*RemoteListRes) Descriptor() ([]byte, []int) {
 	return file_v1_remote_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ListRes) GetList() []*InfoRes {
+func (x *RemoteListRes) GetList() []*RemoteInfoRes {
 	if x != nil {
 		return x.List
 	}
@@ -232,26 +232,30 @@ var File_v1_remote_proto protoreflect.FileDescriptor
 
 var file_v1_remote_proto_rawDesc = []byte{
 	0x0a, 0x0f, 0x76, 0x31, 0x2f, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x12, 0x02, 0x76, 0x31, 0x22, 0x26, 0x0a, 0x07, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71,
-	0x12, 0x1b, 0x0a, 0x09, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0d, 0x52, 0x08, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x49, 0x64, 0x22, 0x4c, 0x0a,
-	0x07, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x10, 0x0a, 0x03,
-	0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x03, 0x61, 0x67, 0x65, 0x12, 0x1b,
-	0x0a, 0x09, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x0d, 0x52, 0x08, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x49, 0x64, 0x22, 0x26, 0x0a, 0x07, 0x4c,
-	0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x12, 0x1b, 0x0a, 0x09, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65,
+	0x6f, 0x12, 0x02, 0x76, 0x31, 0x22, 0x2c, 0x0a, 0x0d, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x49,
+	0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x12, 0x1b, 0x0a, 0x09, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65,
 	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x72, 0x65, 0x6d, 0x6f, 0x74,
-	0x65, 0x49, 0x64, 0x22, 0x2a, 0x0a, 0x07, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x12, 0x1f,
-	0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0b, 0x2e, 0x76,
-	0x31, 0x2e, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x52, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x32,
-	0x50, 0x0a, 0x06, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x12, 0x22, 0x0a, 0x04, 0x49, 0x6e, 0x66,
-	0x6f, 0x12, 0x0b, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x0b,
-	0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x22, 0x00, 0x12, 0x22, 0x0a,
-	0x04, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x0b, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52,
-	0x65, 0x71, 0x1a, 0x0b, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x22,
-	0x00, 0x42, 0x0d, 0x5a, 0x0b, 0x61, 0x70, 0x70, 0x2f, 0x67, 0x72, 0x70, 0x63, 0x2f, 0x76, 0x31,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x49, 0x64, 0x22, 0x52, 0x0a, 0x0d, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x49, 0x6e, 0x66,
+	0x6f, 0x52, 0x65, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x61, 0x67, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x03, 0x61, 0x67, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x72, 0x65,
+	0x6d, 0x6f, 0x74, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x72,
+	0x65, 0x6d, 0x6f, 0x74, 0x65, 0x49, 0x64, 0x22, 0x2c, 0x0a, 0x0d, 0x52, 0x65, 0x6d, 0x6f, 0x74,
+	0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x12, 0x1b, 0x0a, 0x09, 0x72, 0x65, 0x6d, 0x6f,
+	0x74, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x72, 0x65, 0x6d,
+	0x6f, 0x74, 0x65, 0x49, 0x64, 0x22, 0x36, 0x0a, 0x0d, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x4c,
+	0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x12, 0x25, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65,
+	0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x52, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x32, 0x74, 0x0a,
+	0x06, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x12, 0x34, 0x0a, 0x0a, 0x52, 0x65, 0x6d, 0x6f, 0x74,
+	0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x11, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x74,
+	0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x11, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65,
+	0x6d, 0x6f, 0x74, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x22, 0x00, 0x12, 0x34, 0x0a,
+	0x0a, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x11, 0x2e, 0x76, 0x31,
+	0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x11,
+	0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
+	0x73, 0x22, 0x00, 0x42, 0x0d, 0x5a, 0x0b, 0x61, 0x70, 0x70, 0x2f, 0x67, 0x72, 0x70, 0x63, 0x2f,
+	0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -268,17 +272,17 @@ func file_v1_remote_proto_rawDescGZIP() []byte {
 
 var file_v1_remote_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_v1_remote_proto_goTypes = []interface{}{
-	(*InfoReq)(nil), // 0: v1.InfoReq
-	(*InfoRes)(nil), // 1: v1.InfoRes
-	(*ListReq)(nil), // 2: v1.ListReq
-	(*ListRes)(nil), // 3: v1.ListRes
+	(*RemoteInfoReq)(nil), // 0: v1.RemoteInfoReq
+	(*RemoteInfoRes)(nil), // 1: v1.RemoteInfoRes
+	(*RemoteListReq)(nil), // 2: v1.RemoteListReq
+	(*RemoteListRes)(nil), // 3: v1.RemoteListRes
 }
 var file_v1_remote_proto_depIdxs = []int32{
-	1, // 0: v1.ListRes.list:type_name -> v1.InfoRes
-	0, // 1: v1.Remote.Info:input_type -> v1.InfoReq
-	2, // 2: v1.Remote.List:input_type -> v1.ListReq
-	1, // 3: v1.Remote.Info:output_type -> v1.InfoRes
-	3, // 4: v1.Remote.List:output_type -> v1.ListRes
+	1, // 0: v1.RemoteListRes.list:type_name -> v1.RemoteInfoRes
+	0, // 1: v1.Remote.RemoteInfo:input_type -> v1.RemoteInfoReq
+	2, // 2: v1.Remote.RemoteList:input_type -> v1.RemoteListReq
+	1, // 3: v1.Remote.RemoteInfo:output_type -> v1.RemoteInfoRes
+	3, // 4: v1.Remote.RemoteList:output_type -> v1.RemoteListRes
 	3, // [3:5] is the sub-list for method output_type
 	1, // [1:3] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -293,7 +297,7 @@ func file_v1_remote_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_v1_remote_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*InfoReq); i {
+			switch v := v.(*RemoteInfoReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -305,7 +309,7 @@ func file_v1_remote_proto_init() {
 			}
 		}
 		file_v1_remote_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*InfoRes); i {
+			switch v := v.(*RemoteInfoRes); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -317,7 +321,7 @@ func file_v1_remote_proto_init() {
 			}
 		}
 		file_v1_remote_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListReq); i {
+			switch v := v.(*RemoteListReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -329,7 +333,7 @@ func file_v1_remote_proto_init() {
 			}
 		}
 		file_v1_remote_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListRes); i {
+			switch v := v.(*RemoteListRes); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -373,8 +377,8 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type RemoteClient interface {
-	Info(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoRes, error)
-	List(ctx context.Context, in *ListReq, opts ...grpc.CallOption) (*ListRes, error)
+	RemoteInfo(ctx context.Context, in *RemoteInfoReq, opts ...grpc.CallOption) (*RemoteInfoRes, error)
+	RemoteList(ctx context.Context, in *RemoteListReq, opts ...grpc.CallOption) (*RemoteListRes, error)
 }
 
 type remoteClient struct {
@@ -385,18 +389,18 @@ func NewRemoteClient(cc grpc.ClientConnInterface) RemoteClient {
 	return &remoteClient{cc}
 }
 
-func (c *remoteClient) Info(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoRes, error) {
-	out := new(InfoRes)
-	err := c.cc.Invoke(ctx, "/v1.Remote/Info", in, out, opts...)
+func (c *remoteClient) RemoteInfo(ctx context.Context, in *RemoteInfoReq, opts ...grpc.CallOption) (*RemoteInfoRes, error) {
+	out := new(RemoteInfoRes)
+	err := c.cc.Invoke(ctx, "/v1.Remote/RemoteInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *remoteClient) List(ctx context.Context, in *ListReq, opts ...grpc.CallOption) (*ListRes, error) {
-	out := new(ListRes)
-	err := c.cc.Invoke(ctx, "/v1.Remote/List", in, out, opts...)
+func (c *remoteClient) RemoteList(ctx context.Context, in *RemoteListReq, opts ...grpc.CallOption) (*RemoteListRes, error) {
+	out := new(RemoteListRes)
+	err := c.cc.Invoke(ctx, "/v1.Remote/RemoteList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -405,57 +409,57 @@ func (c *remoteClient) List(ctx context.Context, in *ListReq, opts ...grpc.CallO
 
 // RemoteServer is the server API for Remote service.
 type RemoteServer interface {
-	Info(context.Context, *InfoReq) (*InfoRes, error)
-	List(context.Context, *ListReq) (*ListRes, error)
+	RemoteInfo(context.Context, *RemoteInfoReq) (*RemoteInfoRes, error)
+	RemoteList(context.Context, *RemoteListReq) (*RemoteListRes, error)
 }
 
 // UnimplementedRemoteServer can be embedded to have forward compatible implementations.
 type UnimplementedRemoteServer struct {
 }
 
-func (*UnimplementedRemoteServer) Info(context.Context, *InfoReq) (*InfoRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Info not implemented")
+func (*UnimplementedRemoteServer) RemoteInfo(context.Context, *RemoteInfoReq) (*RemoteInfoRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoteInfo not implemented")
 }
-func (*UnimplementedRemoteServer) List(context.Context, *ListReq) (*ListRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+func (*UnimplementedRemoteServer) RemoteList(context.Context, *RemoteListReq) (*RemoteListRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoteList not implemented")
 }
 
 func RegisterRemoteServer(s *grpc.Server, srv RemoteServer) {
 	s.RegisterService(&_Remote_serviceDesc, srv)
 }
 
-func _Remote_Info_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InfoReq)
+func _Remote_RemoteInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoteInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RemoteServer).Info(ctx, in)
+		return srv.(RemoteServer).RemoteInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/v1.Remote/Info",
+		FullMethod: "/v1.Remote/RemoteInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RemoteServer).Info(ctx, req.(*InfoReq))
+		return srv.(RemoteServer).RemoteInfo(ctx, req.(*RemoteInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Remote_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListReq)
+func _Remote_RemoteList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoteListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RemoteServer).List(ctx, in)
+		return srv.(RemoteServer).RemoteList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/v1.Remote/List",
+		FullMethod: "/v1.Remote/RemoteList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RemoteServer).List(ctx, req.(*ListReq))
+		return srv.(RemoteServer).RemoteList(ctx, req.(*RemoteListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -465,12 +469,12 @@ var _Remote_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*RemoteServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Info",
-			Handler:    _Remote_Info_Handler,
+			MethodName: "RemoteInfo",
+			Handler:    _Remote_RemoteInfo_Handler,
 		},
 		{
-			MethodName: "List",
-			Handler:    _Remote_List_Handler,
+			MethodName: "RemoteList",
+			Handler:    _Remote_RemoteList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
