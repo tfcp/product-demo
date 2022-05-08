@@ -2,10 +2,11 @@ package gredis
 
 import (
 	"encoding/json"
-	"tfpro/library/log"
 	"github.com/gogf/gf/container/gvar"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/util/gconv"
+	"tfpro/library/config"
+	"tfpro/library/log"
 	"time"
 
 	"github.com/gomodule/redigo/redis"
@@ -15,16 +16,21 @@ var RedisConn *redis.Pool
 
 // Setup Initialize the Redis instance
 func Setup() error {
+	maxIdle, _ := config.TfConf.Value("redis.default.maxIdle").Int()
+	maxActive, _ := config.TfConf.Value("redis.default.maxActive").Int()
+	idleTimeout, _ := config.TfConf.Value("redis.default.idleTimeout").Duration()
+	host, _ := config.TfConf.Value("redis.default.host").String()
+	pwd, _ := config.TfConf.Value("redis.default.pwd").String()
 	RedisConn = &redis.Pool{
-		MaxIdle:     g.Config().GetInt("redis.default.maxIdle"),
-		MaxActive:   g.Config().GetInt("redis.default.maxActive"),
-		IdleTimeout: g.Config().GetDuration("redis.default.idleTimeout"),
+		MaxIdle:     int(maxIdle),
+		MaxActive:   int(maxActive),
+		IdleTimeout: idleTimeout,
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", g.Config().GetString("redis.default.host"))
+			c, err := redis.Dial("tcp", host)
 			if err != nil {
 				return nil, err
 			}
-			if g.Config().GetString("redis.default.pwd") != "" {
+			if pwd != "" {
 				if _, err := c.Do("AUTH", g.Config().GetString("redis.default.pwd")); err != nil {
 					c.Close()
 					return nil, err

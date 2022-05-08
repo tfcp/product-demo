@@ -42,7 +42,7 @@ grpc project template...
           chmod +x /usr/local/bin/grpcui 
        6.3 调试使用(仅限本地):
         1. make server # 设置本地调试模式
-        2. grpcui -plaintext 127.0.0.1:8000
+        2. grpcui -plaintext 127.0.0.1:9000
     
     7. 文档
         
@@ -52,6 +52,10 @@ grpc project template...
         
         直接基于kratos的配置实现(太香了)
         文档: https://go-kratos.dev/docs/component/config
+        
+    9. 服务注册
+        
+        默认部署在k8s, 走k8s service实现服务发现
 ## 项目结构
 
     |--app         

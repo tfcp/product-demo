@@ -2,10 +2,10 @@ package model
 
 import (
 	"fmt"
-	"github.com/gogf/gf/frame/g"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/pkg/errors"
+	"tfpro/library/config"
 	"time"
 )
 
@@ -57,15 +57,22 @@ func Setup() error {
 
 func setDb(db *gorm.DB, dbName string) (*gorm.DB, error) {
 	var err error
-	db, err = gorm.Open(g.Config().GetString("database."+dbName+".type"), fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
-		g.Config().GetString("database."+dbName+".user"),
-		g.Config().GetString("database."+dbName+".pass"),
-		g.Config().GetString("database."+dbName+".host"),
-		g.Config().GetString("database."+dbName+".name")))
+	dbType, _ := config.TfConf.Value("database." + dbName + ".type").String()
+	dbUser, _ := config.TfConf.Value("database." + dbName + ".user").String()
+	dbPass, _ := config.TfConf.Value("database." + dbName + ".pass").String()
+	dbHost, _ := config.TfConf.Value("database." + dbName + ".host").String()
+	databaseName, _ := config.TfConf.Value("database." + dbName + ".name").String()
+	dbLog, _ := config.TfConf.Value("database." + dbName + ".log").Bool()
+
+	db, err = gorm.Open(dbType, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
+		dbUser,
+		dbPass,
+		dbHost,
+		databaseName))
 	if err != nil {
 		return nil, err
 	}
-	db.LogMode(g.Config().GetBool("database." + dbName + ".log"))
+	db.LogMode(dbLog)
 	// 多数据库不能用这个属性
 	//gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 	//	//return g.Config().GetString("database."+dbName+".prefix") + defaultTableName

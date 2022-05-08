@@ -2,9 +2,9 @@ package client
 
 import (
 	"context"
-	"github.com/gogf/gf/frame/g"
 	"google.golang.org/grpc"
 	v1 "tfpro/app/grpc/v1"
+	"tfpro/library/config"
 	grpcClient "tfpro/library/grpc"
 	"tfpro/library/log"
 )
@@ -17,12 +17,12 @@ func init() {
 	var err error
 	TfRemoteClient, err = NewTfRemoteClient()
 	if err != nil {
-		log.Logger.Fatalf("remote-client init error: %v",err)
+		log.Logger.Fatalf("remote-client init error: %v", err)
 	}
 }
 
 func NewTfRemoteClient() (v1.RemoteClient, error) {
-	addr := g.Config().GetString("client.tf_remote_addr")
+	addr, _ := config.TfConf.Value("client.tf_remote_addr").String()
 	opt := grpcClient.DefaultClient()
 	gc, err := opt.DialContext(
 		context.Background(),

@@ -2,7 +2,6 @@ package bootstrap
 
 import (
 	"fmt"
-	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcmd"
 	"google.golang.org/grpc/reflection"
 	"os"
@@ -10,6 +9,7 @@ import (
 	"tfpro/internal/model"
 	"tfpro/internal/service/demo"
 	"tfpro/library/config"
+	"tfpro/library/environment"
 	"tfpro/library/gredis"
 	"tfpro/library/grpc"
 	"tfpro/library/log"
@@ -22,13 +22,17 @@ var (
 )
 
 func bootstrap() {
-	config.Setup()
-	return
+	var err error
+	environment.Setup()
+	if err = config.Setup(environment.ConfDriverType); err != nil {
+		log.Logger.Fatalf("config init error:%v", err)
+		return
+	}
 	log.Setup()
-	if err := gredis.Setup(); err != nil {
+	if err = gredis.Setup(); err != nil {
 		log.Logger.Fatalf("redis init error:%v", err)
 	}
-	if err := model.Setup(); err != nil {
+	if err = model.Setup(); err != nil {
 		log.Logger.Fatalf("db init error:%v", err)
 		return
 	}
@@ -52,16 +56,12 @@ func gRpcDebug() {
 // rpc project
 func Run() {
 	bootstrap()
-	log.Logger.Println("gRpc server start success.")
 	if os.Getenv("ENV") == "DEV" {
 		log.Logger.Println("gRpc debug mode open.")
 		gRpcDebug()
 	}
-	if os.Getenv("ENV") == "DEV" {
-		log.Logger.Println("gRpc debug mode open.")
-		gRpcDebug()
-	}
-	address := g.Config().GetString("api.addr")
+	address, _ := config.TfConf.Value("grpc.server.addr").String()
+	log.Logger.Printf("gRpc server start【 %s 】.", address)
 	if err := gRPCServer.Run(address); err != nil {
 		log.Logger.Fatal(err)
 	}
