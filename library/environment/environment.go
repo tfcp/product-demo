@@ -45,6 +45,8 @@ var (
 	DiscoveryNodes string
 	// ConfigType [apollo, nacos, files]
 	ConfDriverType string
+	// Apollo addr
+	ApolloAddr string
 )
 
 func Setup() {
@@ -68,6 +70,7 @@ func addFlag(fs *flag.FlagSet) {
 	fs.StringVar(&Color, "deploy.color", os.Getenv("DEPLOY_COLOR"), "deploy.color is the identification of different experimental group.")
 	fs.StringVar(&DiscoveryNodes, "discovery.nodes", os.Getenv("DISCOVERY_NODES"), "discovery.nodes is seed nodes. value: 127.0.0.1:7171,127.0.0.2:7171 etc.")
 	fs.StringVar(&ConfDriverType, "config.driver.type", os.Getenv("CONFIG_DRIVER_TYPE"), "config driver type. value: apollo,files,nacos,consul etc.")
+	fs.StringVar(&ApolloAddr, "apollo.addr", os.Getenv("APOLLO_ADDR"), "apollo addr. ")
 }
 
 func defaultString(env, value string) string {
