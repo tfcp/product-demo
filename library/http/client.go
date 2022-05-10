@@ -4,15 +4,19 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/gogf/gf/os/gcache"
+	"github.com/gogf/gf/util/gconv"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"net/url"
+	"tfpro/library/log"
 	"time"
 )
 
 var (
-	httpClient *http.Client
+	httpClient    *http.Client
+	defaultExpire = 3 * time.Minute
 )
 
 type ResHttp struct {
@@ -40,7 +44,14 @@ func createHTTPClient() *http.Client {
 	return client
 }
 
-func GetHttp(queryurl string) ([]byte, error) {
+func GetHttp(queryurl string, timeout ...time.Duration) ([]byte, error) {
+	resCache, err := gcache.Get(queryurl)
+	if err != nil {
+		log.Logger.Errorf("GetHttp.gcache.GetError:%v", err)
+	}
+	if resCache != nil {
+		return resCache.([]byte), nil
+	}
 	u, _ := url.Parse(queryurl)
 	retstr, err := httpClient.Get(u.String())
 	if err != nil {
@@ -51,10 +62,26 @@ func GetHttp(queryurl string) ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("ioutil.ReadAll %v", err)
 	}
+	expire := defaultExpire
+	if len(timeout) > 0 {
+		expire = timeout[0]
+	}
+	if err = gcache.Set(queryurl, result, expire); err != nil {
+		log.Logger.Errorf("GetHttp.gcache.SetError:%v", err)
+	}
 	return result, nil
 }
 
-func PostHttp(queryurl string, postdata map[string]string) ([]byte, error) {
+func PostHttp(queryurl string, postdata map[string]string, timeout ...time.Duration) ([]byte, error) {
+	postKey := fmt.Sprintf("post#%s#%s", queryurl, gconv.String(postdata))
+	fmt.Println(postKey)
+	resCache, err := gcache.Get(postKey)
+	if err != nil {
+		log.Logger.Errorf("PostHttp.gcache.GetError:%v", err)
+	}
+	if resCache != nil {
+		return resCache.([]byte), nil
+	}
 	data, err := json.Marshal(postdata)
 	if err != nil {
 		return nil, fmt.Errorf("json.Marshal %v", err)
@@ -69,6 +96,13 @@ func PostHttp(queryurl string, postdata map[string]string) ([]byte, error) {
 	result, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("ioutil.ReadAll %v", err)
+	}
+	expire := defaultExpire
+	if len(timeout) > 0 {
+		expire = timeout[0]
+	}
+	if err = gcache.Set(postKey, result, expire); err != nil {
+		log.Logger.Errorf("PostHttp.gcache.SetError:%v", err)
 	}
 	return result, nil
 }
