@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcmd"
+	"github.com/fvbock/endless"
+	"syscall"
 	"tfpro/app/cron"
 	"tfpro/app/process"
 	"tfpro/internal/model"
@@ -29,9 +31,25 @@ func Run() {
 	bootstrap()
 	router.RegisterRouter()
 	addr := g.Config().GetString("api.addr")
-	if err := router.Router.Run(addr); err != nil {
-		log.Logger.Fatalf("router init error:%v", err)
+
+	// 默认
+	//if err := router.Router.Run(addr); err != nil {
+	//	log.Logger.Fatalf("router init error:%v", err)
+	//}
+
+	// 默认endless服务器会监听下列信号：
+	// syscall.SIGHUP，syscall.SIGUSR1，syscall.SIGUSR2，syscall.SIGINT，syscall.SIGTERM和syscall.SIGTSTP
+	// 接收到 SIGHUP 信号将触发`fork/restart` 实现优雅重启（kill -1 pid会发送SIGHUP信号）
+	// 接收到 syscall.SIGINT或syscall.SIGTERM 信号将触发优雅关机
+	server := endless.NewServer(addr, router.Router)
+	server.BeforeBegin = func(add string) {
+		log.Logger.Printf("Actual pid is %d", syscall.Getpid())
 	}
+	err := server.ListenAndServe()
+	if err != nil {
+		log.Logger.Printf("Server err: %v", err)
+	}
+
 }
 
 // cronjob

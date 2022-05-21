@@ -1,28 +1,38 @@
-.PHONY: build clean tool lint help
+.PHONY:install clean tool lint
 
-.PHONY: build
-build:
-	go build main.go
+.PHONY: install
+install:
+	@cd . && go build -o server main.go
 
 .PHONY: server
+all: install
 server:
-	go run main.go server
+	./server server
 
 .PHONY: cron
+all: install
 cron:
-	go run main.go cron
+	./server cron
 
 .PHONY: process
+all: install
 process:
-	go run main.go process
+	./server process
 
 .PHONY: web
 web:
 	cd web/ && npm run dev
 
-.PHONY: tools
-tools:
-	go run main.go tools
+.PHONY: clean
+clean:
+	@rm -rf ./server ./sre-* ./web/web.zip
+
+.PHONY: rice
+rice:
+	go get github.com/GeertJohan/go.rice
+	go get github.com/GeertJohan/go.rice/rice
+	cd tools/rice
+	rice embed-go
 
 .PHONY: build-static
 build-static:
@@ -30,15 +40,8 @@ build-static:
 
 .PHONY: build-linux
 build-linux:
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go
+	@cd . && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build  -o server-linux main.go
 
 .PHONY: build-window
 build-window:
-    CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go
-
-.PHONY: build-rice
-build-rice:
-    go get github.com/GeertJohan/go.rice/rice
-    cd tools/rice
-	rice embed-go
-	mv tools/rice/
+	@cd . && CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o server-windows main.go
