@@ -37,6 +37,12 @@ product and gin project template...
 7. kafka
 
 8. grpc
+    
+    微服务协议
+
+9. endless
+
+      [优雅重启](#https://www.bookstack.cn/read/gin-EDDYCJY-blog/golang-gin-2018-03-15-Gin%E5%AE%9E%E8%B7%B5-%E8%BF%9E%E8%BD%BD%E4%B8%83-Golang%E4%BC%98%E9%9B%85%E9%87%8D%E5%90%AFHTTP%E6%9C%8D%E5%8A%A1.md)
 
 ## 项目结构
 

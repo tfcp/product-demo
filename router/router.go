@@ -28,6 +28,7 @@ func RegisterRouter() {
 	Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	dm := Router.Group("demo")
 	//dm.Use(jwt.JWT()) # jwt auth
+	dm.GET("/test", demo.TestApi)
 	dm.GET("/hello-list", demo.HelloListApi)
 	dm.GET("/hello-info", demo.HelloInfoApi)
 	dm.GET("/user-list", demo.UserListApi)

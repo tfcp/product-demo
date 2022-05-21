@@ -1,11 +1,12 @@
 package demo
 
 import (
+	"github.com/gin-gonic/gin"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/util/gvalid"
 	"tfpro/internal/service/demo"
 	"tfpro/library/code"
 	"tfpro/library/utils"
-	"github.com/gin-gonic/gin"
-	"github.com/gogf/gf/util/gvalid"
 )
 
 type RequestLogin struct {
@@ -62,6 +63,8 @@ func InfoApi(c *gin.Context) {
 	utils.Response(c, code.ErrSuccess, oneInfo)
 }
 
-func LogoutApi() {
+func TestApi(c *gin.Context) {
+	testInfo := g.Config().GetString("test","3")
+	utils.Response(c, code.ErrSuccess, testInfo)
 
 }
