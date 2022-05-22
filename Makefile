@@ -1,4 +1,5 @@
 .PHONY:install clean tool lint
+before = go build -o server main.go
 
 .PHONY: install
 install:
@@ -7,17 +8,17 @@ install:
 .PHONY: server
 all: install
 server:
-	./server server
+	${before} && ./server server
 
 .PHONY: cron
 all: install
 cron:
-	./server cron
+	${before} && ./server cron
 
 .PHONY: process
 all: install
 process:
-	./server process
+	${before} && ./server process
 
 .PHONY: web
 web:
