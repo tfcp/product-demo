@@ -23,15 +23,30 @@ var (
 		Code:    -402,
 		Message: "token过期",
 	}
-	ErrPwd = &Error{
+	ErrAccount = &Error{
 		Code:    -403,
+		Message: "账号异常",
+	}
+	ErrPwd = &Error{
+		Code:    -404,
 		Message: "账号密码错误",
+	}
+	ErrUnable = &Error{
+		Code:    -405,
+		Message: "你的账号已被禁用, 请联系管理员激活",
+	}
+	ErrExist = &Error{
+		Code:    -406,
+		Message: "该名称已存在",
+	}
+	ErrUserUpdate = &Error{
+		Code:    -407,
+		Message: "更新失败",
 	}
 	ErrParam = &Error{
 		Code:    10001,
 		Message: "请求参数错误",
 	}
-
 	ErrDB = &Error{
 		Code:    10002,
 		Message: "DB error",

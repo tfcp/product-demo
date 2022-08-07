@@ -1,9 +1,9 @@
 package jwt
 
 import (
+	"net/http"
 	code2 "tfpro/library/code"
 	"tfpro/library/utils"
-	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -49,4 +49,10 @@ func JWT() gin.HandlerFunc {
 
 		c.Next()
 	}
+}
+
+func GetUserInfo(ctx *gin.Context) *utils.Claims {
+	token := ctx.Request.Header.Get("X-Token")
+	authInfo, _ := utils.ParseToken(token)
+	return authInfo
 }

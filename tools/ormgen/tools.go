@@ -13,7 +13,7 @@ var (
 
 )
 
-func BaseTool(tableName string, dbName string) {
+func Tools(tableName string, dbName string) {
 	user := g.Config().GetString("database." + dbName + ".user")
 	pass := g.Config().GetString("database." + dbName + ".pass")
 	host := g.Config().GetString("database." + dbName + ".host")

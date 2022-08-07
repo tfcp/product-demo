@@ -2,15 +2,16 @@ package bootstrap
 
 import (
 	"fmt"
+	"github.com/fvbock/endless"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcmd"
-	"github.com/fvbock/endless"
 	"syscall"
 	"tfpro/app/cron"
 	"tfpro/app/process"
 	"tfpro/internal/model"
 	"tfpro/library/gredis"
 	"tfpro/library/log"
+	"tfpro/library/zookeeper"
 	"tfpro/router"
 	"tfpro/tools"
 )
@@ -19,6 +20,10 @@ func bootstrap() {
 	log.Setup()
 	if err := gredis.Setup(); err != nil {
 		log.Logger.Fatalf("redis init error:%v", err)
+	}
+	if err := zookeeper.Setup(); err != nil {
+		log.Logger.Fatalf("zookeeper init error:%v", err)
+		return
 	}
 	if err := model.Setup(); err != nil {
 		log.Logger.Fatalf("db init error:%v", err)
