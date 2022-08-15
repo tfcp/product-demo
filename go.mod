@@ -23,8 +23,6 @@ require (
 	github.com/gomodule/redigo v2.0.1-0.20180401191855-9352ab68be13+incompatible
 	github.com/imdario/mergo v0.3.8 // indirect
 	github.com/jinzhu/gorm v0.0.0-20180213101209-6e1387b44c64
-	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/lib/pq v1.10.4 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
@@ -34,7 +32,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/pkg/errors v0.9.1
 	github.com/samuel/go-zookeeper v0.0.0-20201211165307-7117e9ea2414
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/cobra v1.5.0
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.8.1
@@ -46,5 +44,7 @@ require (
 	golang.org/x/tools v0.1.10 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
+	gorm.io/driver/mysql v1.3.6
+	gorm.io/gorm v1.23.8
 	k8s.io/client-go v12.0.0+incompatible
 )

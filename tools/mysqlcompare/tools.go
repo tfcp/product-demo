@@ -1,11 +1,12 @@
 package mysqlcompare
 
 import (
-//"tfpro/tools/mysqlcompare/cmd"
+	"log"
+	"tfpro/tools/mysqlcompare/cmd"
 )
 
 func Tools() {
-	//if err := cmd.Execute(); err != nil {
-	//	log.Fatalln(err)
-	//}
+	if err := cmd.Execute(); err != nil {
+		log.Fatalln(err)
+	}
 }

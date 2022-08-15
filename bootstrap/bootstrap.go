@@ -75,13 +75,13 @@ func RunTools() {
 	//toolArg := gcmd.GetArg(1, "tools")
 	opts := gcmd.GetOptAll()
 	toolName := gcmd.GetOpt("cmd", "orm")
+	parmas := map[string]interface{}{}
 	switch toolName {
 	// ormGen tool
 	// -t: tableName
 	// -d: database if null is default
 	case "orm":
 		database := "default"
-		table := ""
 		if _, ok := opts["d"]; ok {
 			database = opts["d"]
 		}
@@ -97,10 +97,12 @@ Usage:
 				`)
 			return
 		}
-		table = opts["t"]
-		tools.OrmGenTools(table, database)
-	}
+		parmas["table"] = opts["t"]
+		parmas["database"] = database
+	case "diff":
 
+	}
+	tools.Tools(toolName, parmas)
 }
 
 func RunHelp() {

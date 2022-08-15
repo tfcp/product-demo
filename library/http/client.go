@@ -74,7 +74,6 @@ func GetHttp(queryurl string, timeout ...time.Duration) ([]byte, error) {
 
 func PostHttp(queryurl string, postdata map[string]string, timeout ...time.Duration) ([]byte, error) {
 	postKey := fmt.Sprintf("post#%s#%s", queryurl, gconv.String(postdata))
-	fmt.Println(postKey)
 	resCache, err := gcache.Get(postKey)
 	if err != nil {
 		log.Logger.Errorf("PostHttp.gcache.GetError:%v", err)

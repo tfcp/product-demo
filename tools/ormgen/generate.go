@@ -372,7 +372,7 @@ func (t *Table2Struct) makeOrmMethod() string {
 	return methodStr
 }
 
-// todo demo
+// todo auth
 //func (t *Table2Struct) makeOneFuncStr() string {
 //	tableName := t.camelCase(t.table)
 //	oneFuncStr := "\r\n"

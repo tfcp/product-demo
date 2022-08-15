@@ -17,3 +17,8 @@ golang用于生成struct的简易小工具
 ```
 golang二进制更新
 ```
+
+### mysql对比工具
+```
+https://github.com/camry/go-mysqldiff
+```
