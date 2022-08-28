@@ -2,6 +2,7 @@ package demo
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/gogf/gf/util/gconv"
 	"github.com/gogf/gf/util/gvalid"
 	"tfpro/internal/service/demo"
 	"tfpro/library/code"
@@ -159,20 +160,15 @@ type RequestUserSave struct {
 
 func UserSaveApi(c *gin.Context) {
 	var reqUserSave RequestUserSave
-	c.Bind(&reqUserSave)
+	c.ShouldBind(&reqUserSave)
 	if err := gvalid.CheckStruct(c, reqUserSave, nil); err != nil {
 		utils.Response(c, code.ErrSystem, err.FirstString())
 		return
 	}
+
 	hs := demo.NewUserService()
-	err := hs.Save(reqUserSave.Id,
-		reqUserSave.Status,
-		reqUserSave.Role,
-		reqUserSave.Sex,
-		reqUserSave.Age,
-		reqUserSave.Name,
-		reqUserSave.Avatar,
-		reqUserSave.Introduction)
+	resourceInfo := gconv.Map(reqUserSave)
+	err := hs.Save(resourceInfo)
 	if err != nil {
 		utils.Response(c, code.ErrSystem, err.Error())
 		return

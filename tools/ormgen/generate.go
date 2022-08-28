@@ -369,10 +369,11 @@ func (t *Table2Struct) makeOrmMethod() string {
 	methodStr += t.makeCreateFuncStr()
 	methodStr += t.makeUpdateFuncStr()
 	methodStr += t.makeDeleteFuncStr()
+	methodStr += t.makeCountFuncStr()
 	return methodStr
 }
 
-// todo auth
+// todo demo
 //func (t *Table2Struct) makeOneFuncStr() string {
 //	tableName := t.camelCase(t.table)
 //	oneFuncStr := "\r\n"
@@ -390,9 +391,15 @@ func (t *Table2Struct) makeOrmMethod() string {
 //	return oneFuncStr
 //}
 
+func (t *Table2Struct) getModelStr() string {
+	tableName := t.camelCase(t.table)
+	modelName := "( this *" + tableName + " ) "
+	return modelName
+}
+
 func (t *Table2Struct) makeOneFuncStr() string {
 	tableName := t.camelCase(t.table)
-	oneFuncStr := "func " + "One" + tableName + "(where map[string]interface{}) (*" + tableName + ",error){\r\n"
+	oneFuncStr := "func " + t.getModelStr() + "One" + tableName + "(where map[string]interface{}) (" + tableName + ",error){\r\n"
 	oneFuncStr += "}\r\n"
 	oneFuncStr += "\r\n"
 	return oneFuncStr
@@ -400,7 +407,7 @@ func (t *Table2Struct) makeOneFuncStr() string {
 
 func (t *Table2Struct) makeDeleteFuncStr() string {
 	tableName := t.camelCase(t.table)
-	deleteFuncStr := "func " + "Delete" + tableName + "(where map[string]interface{}) error {\r\n"
+	deleteFuncStr := "func " + t.getModelStr() + "Delete" + tableName + "(where map[string]interface{}) error {\r\n"
 	deleteFuncStr += "}\r\n"
 	deleteFuncStr += "\r\n"
 	return deleteFuncStr
@@ -408,7 +415,7 @@ func (t *Table2Struct) makeDeleteFuncStr() string {
 
 func (t *Table2Struct) makeListFuncStr() string {
 	tableName := t.camelCase(t.table)
-	listFuncStr := "func " + "List" + tableName + "(where map[string]interface{}, page, size int) ([]*" + tableName + ",error){\r\n"
+	listFuncStr := "func " + t.getModelStr() + "List" + tableName + "(where map[string]interface{}, page, size int) ([]*" + tableName + ",error){\r\n"
 	listFuncStr += "}\r\n"
 	listFuncStr += "\r\n"
 	return listFuncStr
@@ -416,7 +423,7 @@ func (t *Table2Struct) makeListFuncStr() string {
 
 func (t *Table2Struct) makeCreateFuncStr() string {
 	tableName := t.camelCase(t.table)
-	addFuncStr := "func " + "Create" + tableName + "(where map[string]interface{}) error {\r\n"
+	addFuncStr := "func " + t.getModelStr() + "Create" + tableName + "(" + t.table + " " + tableName + ") error {\r\n"
 	addFuncStr += "}\r\n"
 	addFuncStr += "\r\n"
 	return addFuncStr
@@ -424,7 +431,15 @@ func (t *Table2Struct) makeCreateFuncStr() string {
 
 func (t *Table2Struct) makeUpdateFuncStr() string {
 	tableName := t.camelCase(t.table)
-	updateFuncStr := "func " + "Update" + tableName + "(where map[string]interface{}) error {\r\n"
+	updateFuncStr := "func " + t.getModelStr() + "Update" + tableName + "(" + t.table + " " + tableName + ",upMap map[string]interface{}) error {\r\n"
+	updateFuncStr += "}\r\n"
+	updateFuncStr += "\r\n"
+	return updateFuncStr
+}
+
+func (t *Table2Struct) makeCountFuncStr() string {
+	tableName := t.camelCase(t.table)
+	updateFuncStr := "func " + t.getModelStr() + "Count" + tableName + "(where map[string]interface{}) (int, error) {\r\n"
 	updateFuncStr += "}\r\n"
 	updateFuncStr += "\r\n"
 	return updateFuncStr

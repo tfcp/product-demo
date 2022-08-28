@@ -1,6 +1,7 @@
 package demo
 
 import (
+	"github.com/gogf/gf/util/gconv"
 	"tfpro/internal/model/demo"
 	"tfpro/library/log"
 	"tfpro/library/utils"
@@ -86,58 +87,36 @@ func (this *UserService) ChangeStatus(id, status int) error {
 	return nil
 }
 
-func (this *UserService) Save(id, status, role, sex, age int, name, avatar, introduction string) error {
-	newUser := demo.User{
-		Name:         name,
-		Age:          age,
-		Sex:          sex,
-		Status:       status,
-		Role:         role,
-		Pwd:          "",
-		Avatar:       avatar,
-		Introduction: introduction,
+func (this *UserService) Save(userInfo map[string]interface{}) error {
+	var (
+		err error
+	)
+	newUser := demo.User{}
+	if err := gconv.Struct(userInfo, &newUser); err != nil {
+		log.Logger.Errorf("UserService Save StructError: %v", err)
+		return err
 	}
-	if id > 0 {
-		// update
-		whereUp := map[string]interface{}{
-			"id": id,
-		}
-		userUp, err := this.userModel.OneUser(whereUp)
-		if err != nil {
-			log.Logger.Errorf("UserService Save OneUserError: %v", err)
+	userId, ok := userInfo["id"].(int)
+	if ok {
+		if userId > 0 {
+			resourceUp, err := this.userModel.OneUser(map[string]interface{}{
+				"id": userId,
+			})
+			if err != nil {
+				log.Logger.Errorf("UserService Save OneError: %v", err)
+				return err
+			}
+			if err = this.userModel.UpdateUser(resourceUp, userInfo); err != nil {
+				log.Logger.Errorf("UserService Save UpdateError: %v", err)
+				return err
+			}
 			return err
 		}
-		upMap := map[string]interface{}{}
-		if status > 0 {
-			upMap["status"] = status
-		}
-		if role > 0 {
-			upMap["role"] = role
-		}
-		if sex > 0 {
-			upMap["sex"] = sex
-		}
-		if age > 0 {
-			upMap["age"] = age
-		}
-		if name != "" {
-			upMap["name"] = name
-		}
-		if avatar != "" {
-			upMap["avatar"] = avatar
-		}
-		if introduction != "" {
-			upMap["introduction"] = introduction
-		}
-		if err := this.userModel.UpdateUser(userUp, upMap); err != nil {
-			log.Logger.Errorf("UserService Save UpdateUserError: %v", err)
-			return err
-		}
-		return nil
 	}
-	if err := this.userModel.CreateUser(newUser); err != nil {
-		log.Logger.Errorf("UserService Save CreateUserError: %v", err)
-		return nil
+	err = this.userModel.CreateUser(newUser)
+	if err != nil {
+		log.Logger.Errorf("UserService Save CreateError: %v", err)
+		return err
 	}
-	return nil
+	return err
 }
