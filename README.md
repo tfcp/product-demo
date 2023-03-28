@@ -29,10 +29,8 @@ product and gin project template...
 
 6.gin-swagger
     
-    api文档: https://www.jianshu.com/p/0563b1fc3ed9
-    go get -u github.com/swaggo/swag/cmd/swag
-    swag init
-    rooter中引入_"tfpro/docs"
+    api文档: https://github.com/swaggo/gin-swagger
+    demo: https://github.com/swaggo/gin-swagger/blob/master/example/basic/main.go
     
 7. kafka
 
